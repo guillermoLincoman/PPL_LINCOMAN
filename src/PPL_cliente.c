@@ -79,8 +79,6 @@ int addClient(eClient list[], int len, int id, char name[], int cuit, char stree
 			strncpy(list[index].province, province, 51);
 			strncpy(list[index].country, country, 51);
 			list[index].isEmpty=OCUPADO;
-		}else{
-			printf("\nNo hay lugar disponible....\n\n");
 		}
 	}
 	return error;
@@ -111,7 +109,6 @@ eClient addClientNew(int idNuevoCliente)
 
     return clienteNuevo;
 }
-
 
 /** \brief Busca un empleado por Id e indica en que posicion se encuentra
  *

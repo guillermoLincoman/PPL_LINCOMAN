@@ -15,6 +15,8 @@ int main()
     int idProxTrabajo=1000;
     int aux;
     int opcion;
+    int contClientes;
+    contClientes = 0;
 
     eClient client[TC];
     aux= iniciar(client, TC);
@@ -29,22 +31,21 @@ int main()
     do
     {
     	menu();
-        opcion=cargarUnEntero("Elija una opcion: ","Elija una opcion entre 0 y 4: ", 0, 4, 4);
+        opcion=cargarUnEntero("Elija una opcion: ","Elija una opcion entre 0 y 4: ", 0, 9, 4);
         switch(opcion)
         {
             case 1:
-            	if(idProxTrabajo<2000)
-            	{
-                    aux= agregarCliente(client, TC, idProxTrabajo);
+            	//1. aux inicializa en -1, en caso de una carga se le da valor 0 a aux
+                aux= agregarCliente(client, TC, idProxTrabajo);
+                if(aux != -1){
+                	contClientes++;
                     idProxTrabajo++;
-            	}else{
-            		printf("\nNo hay mas lugar disponible....\n");
-            	}
+                }
+
             	limpiar();
                 break;
             case 2:
-                if(aux==0)
-                {
+                if(contClientes>0){
                 	modifiCliente(client, TC, idProxTrabajo);
                 }else{
                     printf("\nNo puede modificar empleados sin antes cargar uno...\n");
@@ -52,16 +53,20 @@ int main()
                 limpiar();
                 break;
             case 3:
-                if(aux==0)
-                {
+                if(contClientes>0){
                 	eliminarCliente(client, TC, idProxTrabajo);
+                	contClientes--;
                 }else{
                     printf("\nNo puede eliminar empleados sin antes cargar uno...\n");
                 }
                 limpiar();
                 break;
-            case 4:
-            	printClients(client, TC);
+            case 6:
+                if(contClientes>0){
+                	printClients(client, TC);
+                }else{
+                    printf("\nNo hay clientes cargados...\n");
+                }
                 limpiar();
                 break;
         }
