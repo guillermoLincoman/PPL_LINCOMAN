@@ -31,17 +31,15 @@ int main()
     do
     {
     	menu();
-        opcion=cargarUnEntero("Elija una opcion: ","Elija una opcion entre 0 y 4: ", 0, 9, 4);
+        opcion=cargarUnEntero("Elija una opcion: ", "Elija una opcion entre 0 y 4: ", 0, 9, 4);
         switch(opcion)
         {
             case 1:
-            	//1. aux inicializa en -1, en caso de una carga se le da valor 0 a aux
                 aux= agregarCliente(client, TC, idProxTrabajo);
                 if(aux != -1){
                 	contClientes++;
                     idProxTrabajo++;
                 }
-
             	limpiar();
                 break;
             case 2:

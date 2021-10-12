@@ -212,6 +212,7 @@ int modificarCliente(eClient list[], int len, int ultimoId)
     int index;
     int error;
     int auxNum;
+    int confirmacion;
     char auxCadena[51];
     error=-1;
     if(list != NULL)
@@ -244,29 +245,58 @@ int modificarCliente(eClient list[], int len, int ultimoId)
             {
             	case 1:
             		getUsuario(auxCadena, "Ingrese la nueva CALLE: \n", "\nError, ingrese una calle valida (max 40 caracteres): ", 1, 40, 4);
-        			strncpy(list[index].street, auxCadena, 51);
-                    printf("\n La Calle fue modificada con exito...\n");
+        			printf("\nLa nueva calle es: %s\n", auxCadena);
+        			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
+        			if(confirmacion==1){
+        				strncpy(list[index].street, auxCadena, 51);
+        				printf("\n La Calle fue modificada con exito...\n");
+        			}else{
+        				printf("\n La Calle NO fue modificada...\n");
+        			}
                     break;
                 case 2:
                 	auxNum=cargarUnEntero("Ingrese la nueva Altura: \n","Error, ingrese una altura (entre 0 y 27300): \n",0, 27300, 4);
-                	list[index].altitude = auxNum;
-                	printf("\n La Altura fue modificada con exito...\n");
-                    error=0;
+        			printf("\nLa nueva Altura es: %d\n", auxNum);
+        			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
+        			if(confirmacion==1){
+                    	list[index].altitude = auxNum;
+                    	printf("\n La Altura fue modificada con exito...\n");
+        			}else{
+        				printf("\n La Altura NO fue modificada...\n");
+        			}
                     break;
                 case 3:
             		getUsuario(auxCadena, "Ingrese la nueva CIUDAD: \n", "\nError, ingrese una CIUDAD valida valido (max 58 caracteres): ", 1, 58, 4);
-            		strncpy(list[index].city, auxCadena, 51);
-            		printf("\n La Ciudad fue modificada con exito...\n");
+        			printf("\nLa nueva Ciudad es: %s\n", auxCadena);
+        			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
+        			if(confirmacion==1){
+                		strncpy(list[index].city, auxCadena, 51);
+                		printf("\n La Ciudad fue modificada con exito...\n");
+        			}else{
+        				printf("\n La Ciudad NO fue modificada...\n");
+        			}
                     break;
                 case 4:
             		getUsuario(auxCadena, "Ingrese la nueva PROVINCIA: \n", "\nError, ingrese una PROVINCIA valida valido (max 51 caracteres): ", 1, 51, 4);
-            		strncpy(list[index].province, auxCadena, 51);
-            		printf("\n La Provincia fue modificada con exito...\n");
+        			printf("\nLa nueva Provincia es: %s\n", auxCadena);
+        			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
+        			if(confirmacion==1){
+                		strncpy(list[index].province, auxCadena, 51);
+                		printf("\n La Provincia fue modificada con exito...\n");
+        			}else{
+        				printf("\n La Provincia NO fue modificada...\n");
+        			}
                     break;
                 case 5:
             		getUsuario(auxCadena, "Ingrese el nuevo PAIS: \n", "\nError, ingrese un PAIS valida valido (max 64 caracteres): ", 1, 64, 4);
-            		strncpy(list[index].country, auxCadena, 51);
-            		printf("\n El Pais fue modificada con exito...\n");
+        			printf("\nEl nuevo Pais es: %s\n", auxCadena);
+        			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
+        			if(confirmacion==1){
+                		strncpy(list[index].country, auxCadena, 51);
+                		printf("\n El Pais fue modificado con exito...\n");
+        			}else{
+        				printf("\n El Pais NO fue modificado...\n");
+        			}
                     break;
             }
         }while(opcion!=0);
