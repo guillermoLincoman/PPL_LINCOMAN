@@ -10,6 +10,14 @@
 #include <conio.h>
 #include <string.h>
 #include <unistd.h>
+#define OCUPADO 0
+#define VACIO -1
+#define PROCESADO 0
+#define PENDIENTE -1
+#define TC 100
+#define TP 1000
+
+
 #ifndef EXTRAS_H_
 #define EXTRAS_H_
 void menu();

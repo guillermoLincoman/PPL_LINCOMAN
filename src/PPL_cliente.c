@@ -68,8 +68,8 @@ int addClient(eClient list[], int len, int id, char name[], int cuit, char stree
 	if(list != NULL)
 	{
 		index= BuscarLibre(list, len);
-		error=0;
 		if(index!=-1){
+			error=0;
 			list[index].idCompany=id;
 			strncpy(list[index].name, name, 51);
 			list[index].cuit=cuit;
@@ -104,7 +104,6 @@ eClient addClientNew(int idNuevoCliente)
     getString(clienteNuevo.city, "\nCiudad: ", "\nError, ingrese una ciudad valida (max 51 caracteres): ", 1, 51, 4);
     getString(clienteNuevo.province, "\nProvincia: ", "\nError, ingrese una provincia valida (max 51 caracteres): ", 1, 51, 4);
     getString(clienteNuevo.country, "\nPais: ", "\nError, ingrese un pais valido (max 51 caracteres): ", 1, 51, 4);
-	clienteNuevo.isEmpty = OCUPADO;
 	printf("------------------------------------\n");
 
     return clienteNuevo;

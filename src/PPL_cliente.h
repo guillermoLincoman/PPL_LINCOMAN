@@ -5,9 +5,6 @@
  *      Author: Compumar
  */
 #include "PPL_inputs.h"
-#define OCUPADO 0
-#define VACIO -1
-#define TC 100
 
 struct
 {

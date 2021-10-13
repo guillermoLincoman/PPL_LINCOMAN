@@ -13,13 +13,15 @@ int main()
 {
     setbuf(stdout, NULL);
     int idProxTrabajo=1000;
+    int idProxPedido=1;
     int aux;
     int opcion;
     int contClientes;
     contClientes = 0;
 
     eClient client[TC];
-    aux= iniciar(client, TC);
+    ePedido pedidos[TP];
+    aux= iniciar(client, TC, pedidos, TP);
     if(aux!=0){
     	printf("Error, no es posible iniciar el programa....");
     	return 0;
@@ -42,6 +44,7 @@ int main()
                 }
             	limpiar();
                 break;
+
             case 2:
                 if(contClientes>0){
                 	modifiCliente(client, TC, idProxTrabajo);
@@ -50,6 +53,7 @@ int main()
                 }
                 limpiar();
                 break;
+
             case 3:
                 if(contClientes>0){
                 	eliminarCliente(client, TC, idProxTrabajo);
@@ -59,6 +63,15 @@ int main()
                 }
                 limpiar();
                 break;
+
+            case 4:
+                if(contClientes>0){
+                	agregarPedido(client, TC, pedidos, TP, idProxPedido, idProxTrabajo);
+                	idProxPedido++;
+                }
+                limpiar();
+                break;
+
             case 6:
                 if(contClientes>0){
                 	printClients(client, TC);

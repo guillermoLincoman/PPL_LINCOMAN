@@ -13,6 +13,7 @@ struct
  int kilosHDPE;
  int kilosLPDE;
  int kilosPP;
+ int kilosNoReciclabes;
  int kilosTotales;
  int estado;
  int isEmpty;
@@ -20,9 +21,12 @@ struct
 
 #ifndef PPL_PEDIDOS_H_
 #define PPL_PEDIDOS_H_
-int initClient(eClient list[], int len);
-int BuscarLibre(eClient list[], int len);
-eClient addClientNew(int idNuevoCliente);
+int initPedidos(ePedido list[], int len);
+int buscarLibrePedido(ePedido list[], int len);
+ePedido addPedidoNew(int idNuevoPedido, int idCliente);
+int addPedido(ePedido list[], int len, int idEmpresa, int idPedido, int kilosHDPE, int kilosLPDE, int kilosPP, int kilosNoReciclabes, int kilosTotales);
+void printPedidos(ePedido list[], int len);
+void printPedido(ePedido list);
 
 
 
