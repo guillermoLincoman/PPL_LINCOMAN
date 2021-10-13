@@ -16,6 +16,8 @@
 #define PENDIENTE -1
 #define TC 100
 #define TP 1000
+#define TE 2
+
 
 
 #ifndef EXTRAS_H_

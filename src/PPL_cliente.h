@@ -13,9 +13,7 @@ struct
  int cuit;
  char street[51];
  int altitude;
- char city[51];
- char province[51];
- char country[51];
+ char localidad[51];
  int isEmpty;
 }typedef eClient;
 
@@ -25,11 +23,9 @@ struct
 
 int initClient(eClient list[], int len);
 int BuscarLibre(eClient list[], int len);
-int addClient(eClient list[], int len, int id, char name[], int cuit, char street[], int altitude, char city[], char province[], char country[]);
+int addClient(eClient list[], int len, int id, char name[], int cuit, char street[], int altitude, char localidad[]);
 eClient addClientNew(int idNuevoCliente);
 int findClientById(eClient list[], int len,int id);
-void printClients(eClient list[], int len);
-void printClient(eClient list);
 int removeClient(eClient list[], int len, int ultimoId);
 int modificarCliente(eClient list[], int len, int ultimoId);
 

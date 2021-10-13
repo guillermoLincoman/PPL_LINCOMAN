@@ -10,23 +10,30 @@ struct
 {
  int idEmpresa;
  int idPedido;
+ int cuitCliente;
  int kilosHDPE;
  int kilosLPDE;
  int kilosPP;
- int kilosNoReciclabes;
  int kilosTotales;
+ int kilosTotalesProcesados;
  int estado;
  int isEmpty;
 }typedef ePedido;
+
+struct
+{
+ int estado;
+ char descripcion[20];
+}typedef eEstado;
 
 #ifndef PPL_PEDIDOS_H_
 #define PPL_PEDIDOS_H_
 int initPedidos(ePedido list[], int len);
 int buscarLibrePedido(ePedido list[], int len);
-ePedido addPedidoNew(int idNuevoPedido, int idCliente);
-int addPedido(ePedido list[], int len, int idEmpresa, int idPedido, int kilosHDPE, int kilosLPDE, int kilosPP, int kilosNoReciclabes, int kilosTotales);
-void printPedidos(ePedido list[], int len);
-void printPedido(ePedido list);
+ePedido addPedidoNew(int idNuevoPedido, int idCliente, int cuit);
+int addPedido(ePedido list[], int len, int idPedido, int cuitCliente, int idEmpresa, int kilosTotales);
+int findPedidoById(ePedido list[], int len,int id);
+
 
 
 

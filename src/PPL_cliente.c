@@ -60,7 +60,7 @@ int BuscarLibre(eClient list[], int len)
  * \param int idNuevoEmpleado id del nuevo empleado a cargar
  * \return Devuelve -1 si hay un error y 0 si se cargo el empleado
 */
-int addClient(eClient list[], int len, int id, char name[], int cuit, char street[], int altitude, char city[], char province[], char country[])
+int addClient(eClient list[], int len, int id, char name[], int cuit, char street[], int altitude, char localidad[])
 {
 	int error;
 	int index;
@@ -75,9 +75,7 @@ int addClient(eClient list[], int len, int id, char name[], int cuit, char stree
 			list[index].cuit=cuit;
 			strncpy(list[index].street, street, 51);
 			list[index].altitude=altitude;
-			strncpy(list[index].city, city, 51);
-			strncpy(list[index].province, province, 51);
-			strncpy(list[index].country, country, 51);
+			strncpy(list[index].localidad, localidad, 51);
 			list[index].isEmpty=OCUPADO;
 		}
 	}
@@ -101,9 +99,7 @@ eClient addClientNew(int idNuevoCliente)
 	printf("------------------------------------\n");
     getString(clienteNuevo.street, "\nCalle: ", "\nError, ingrese una calle valida (max 40 caracteres): ", 1, 40, 4);
     clienteNuevo.altitude = cargarUnEntero("\nAltura: ", "\nError, ingrese un altura valida (entre 0 y 27300): ", 0, 27300, 4);
-    getString(clienteNuevo.city, "\nCiudad: ", "\nError, ingrese una ciudad valida (max 51 caracteres): ", 1, 51, 4);
-    getString(clienteNuevo.province, "\nProvincia: ", "\nError, ingrese una provincia valida (max 51 caracteres): ", 1, 51, 4);
-    getString(clienteNuevo.country, "\nPais: ", "\nError, ingrese un pais valido (max 51 caracteres): ", 1, 51, 4);
+    getString(clienteNuevo.localidad, "\nLocalidad: ", "\nError, ingrese una localidad valida (max 51 caracteres): ", 1, 51, 4);
 	printf("------------------------------------\n");
 
     return clienteNuevo;
@@ -135,39 +131,7 @@ int findClientById(eClient list[], int len,int id)
  	}
  	return index;
 }
-/** \brief Muestra el contenido en la estructura de empleados
- *
- * \param Employee list[] = estructura de empleados
- * \param len = tamaño de estructura empleados.
 
- */
-void printClients(eClient list[], int len)
-{
-    int i;
-    printf("\n________________________________________________________________________________________________________________________________________________________________\n");
-    printf("                                                                       LISTADO DE CLIENTES                                                                      |");
-    printf("\n________________________________________________________________________________________________________________________________________________________________\n");
-    printf("  ID EMPRESA  |   NOMBRE EMPRESA  |     CUIT      |          CALLE         |   ALTURA   |         CIUDAD         |        PROVINCIA       |        PAIS         |\n");
-    printf("______________|___________________|_______________|________________________|____________|________________________|________________________|_____________________|\n");
-    for(i=0; i<len; i++)
-    {
-    	if(list[i].isEmpty == OCUPADO)
-    	{
-    		printClient(list[i]);
-    	}
-    }
-}
-/** \brief Muestra el contenido de un empleado
- *
- * \param Employee list[] = estructura de empleados
-
- */
-void printClient(eClient list)
-{
-    printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-    printf("  %4d     |  %20s|  %11d  |  %20s  |   %6d   |  %20s  |  %20s  |  %20s  \n", list.idCompany, list.name, list.cuit, list.street, list.altitude, list.city, list.province, list.country);
-    printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-}
 
 /** \brief Elimina un empleado por ID
  *
@@ -193,9 +157,7 @@ int removeClient(eClient list[], int len, int ultimoId)
 			list[i].cuit = 0;
 			strncpy(list[i].street, " ", 51);
 			list[i].altitude=0;
-			strncpy(list[i].city, " ", 51);
-			strncpy(list[i].province, " ", 51);
-			strncpy(list[i].country, " ", 51);
+			strncpy(list[i].localidad, " ", 51);
 			list[i].isEmpty=VACIO;
 	        printf("\nEl CLIENTE fue borrado con exito....\n\n");
 			error=0;
@@ -225,20 +187,18 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         do{
         	limpiar();
             error=0;
-            printf("\n________________________________________________________________________________________________________________________________________________________________\n");
-            printf("  ID EMPRESA  |   NOMBRE EMPRESA  |     CUIT      |          CALLE         |   ALTURA   |         CIUDAD         |        PROVINCIA       |        PAIS         |\n");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            printf("\n________________________________________________________________________________________________________________\n");
+            printf("   ID EMPRESA  |    NOMBRE EMPRESA    |     CUIT     |          CALLE       |   ALTURA   |       LOCALIDAD      |\n");
+            printf("----------------------------------------------------------------------------------------------------------------\n");
             printClient(list[index]);
             printf("________________________\n");
             printf("| Que desea modificar? |\n");
             printf("| 1. CALLE             |\n");
             printf("| 2. ALTURA            |\n");
-            printf("| 3. CIUDAD            |\n");
-            printf("| 4. PROVINCIA         |\n");
-            printf("| 5. PAIS              |\n");
+            printf("| 3. LOCALIDAD         |\n");
             printf("| 0. VOLVER AL MENU    |\n");
             printf("|______________________|\n");
-            opcion=cargarUnEntero("\nElija una opcion: ", "\nError, elija una opcion valida: ", 0, 5, 4);
+            opcion=cargarUnEntero("\nElija una opcion: ", "\nError, elija una opcion valida: ", 0, 3, 4);
 
             switch(opcion)
             {
@@ -265,38 +225,17 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         			}
                     break;
                 case 3:
-            		getUsuario(auxCadena, "Ingrese la nueva CIUDAD: \n", "\nError, ingrese una CIUDAD valida valido (max 58 caracteres): ", 1, 58, 4);
-        			printf("\nLa nueva Ciudad es: %s\n", auxCadena);
+            		getUsuario(auxCadena, "Ingrese la nueva Localidad: \n", "\nError, ingrese una CIUDAD valida valido (max 58 caracteres): ", 1, 58, 4);
+        			printf("\nLa nueva Localidad es: %s\n", auxCadena);
         			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
         			if(confirmacion==1){
-                		strncpy(list[index].city, auxCadena, 51);
-                		printf("\n La Ciudad fue modificada con exito...\n");
+                		strncpy(list[index].localidad, auxCadena, 51);
+                		printf("\n La Localidad fue modificada con exito...\n");
         			}else{
-        				printf("\n La Ciudad NO fue modificada...\n");
+        				printf("\n La Localidad NO fue modificada...\n");
         			}
                     break;
-                case 4:
-            		getUsuario(auxCadena, "Ingrese la nueva PROVINCIA: \n", "\nError, ingrese una PROVINCIA valida valido (max 51 caracteres): ", 1, 51, 4);
-        			printf("\nLa nueva Provincia es: %s\n", auxCadena);
-        			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
-        			if(confirmacion==1){
-                		strncpy(list[index].province, auxCadena, 51);
-                		printf("\n La Provincia fue modificada con exito...\n");
-        			}else{
-        				printf("\n La Provincia NO fue modificada...\n");
-        			}
-                    break;
-                case 5:
-            		getUsuario(auxCadena, "Ingrese el nuevo PAIS: \n", "\nError, ingrese un PAIS valida valido (max 64 caracteres): ", 1, 64, 4);
-        			printf("\nEl nuevo Pais es: %s\n", auxCadena);
-        			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
-        			if(confirmacion==1){
-                		strncpy(list[index].country, auxCadena, 51);
-                		printf("\n El Pais fue modificado con exito...\n");
-        			}else{
-        				printf("\n El Pais NO fue modificado...\n");
-        			}
-                    break;
+
             }
         }while(opcion!=0);
         }

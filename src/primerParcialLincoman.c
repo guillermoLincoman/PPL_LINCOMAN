@@ -17,10 +17,14 @@ int main()
     int aux;
     int opcion;
     int contClientes;
+    int contPedidosPendientes;
+    int contPedidosProcesados;
+    contPedidosProcesados = 0;
     contClientes = 0;
-
+    contPedidosPendientes = 0;
     eClient client[TC];
     ePedido pedidos[TP];
+    eEstado estado[TE]={{-1,"PENDIENTE"},{0,"PROCESADO"}};
     aux= iniciar(client, TC, pedidos, TP);
     if(aux!=0){
     	printf("Error, no es posible iniciar el programa....");
@@ -49,7 +53,7 @@ int main()
                 if(contClientes>0){
                 	modifiCliente(client, TC, idProxTrabajo);
                 }else{
-                    printf("\nNo puede modificar empleados sin antes cargar uno...\n");
+                    printf("\nNo puede modificar clientes sin antes cargar uno...\n");
                 }
                 limpiar();
                 break;
@@ -59,24 +63,57 @@ int main()
                 	eliminarCliente(client, TC, idProxTrabajo);
                 	contClientes--;
                 }else{
-                    printf("\nNo puede eliminar empleados sin antes cargar uno...\n");
+                    printf("\nNo puede eliminar clientes sin antes cargar uno...\n");
                 }
                 limpiar();
                 break;
 
             case 4:
                 if(contClientes>0){
-                	agregarPedido(client, TC, pedidos, TP, idProxPedido, idProxTrabajo);
+                	agregarPedido(client, TC, pedidos, TP, estado, TE, idProxPedido, idProxTrabajo);
+                	contPedidosPendientes++;
                 	idProxPedido++;
+                }else{
+                    printf("\nNo puede crear pedidos sin antes cargar un cliente...\n");
                 }
                 limpiar();
                 break;
 
+            case 5:
+                if(contPedidosPendientes>0){
+                	aux = procesarPedido(client, TC, pedidos, TP, estado, TE, idProxPedido);
+                	if(aux==0)
+                	{
+
+                    	contPedidosPendientes--;
+                    	contPedidosProcesados++;
+                	}
+                }else{
+                    printf("\nNo hay pedidos pendientes...\n");
+                }
+                limpiar();
+                break;
             case 6:
                 if(contClientes>0){
                 	printClients(client, TC);
                 }else{
                     printf("\nNo hay clientes cargados...\n");
+                }
+                limpiar();
+                break;
+            case 7:
+                if(contPedidosPendientes>0){
+                	printPedidosPendientes(pedidos, TP, client, TC, estado, TE);
+                }else{
+                    printf("\nNo hay pedidos pendientes...\n");
+                }
+                limpiar();
+                break;
+            case 8:
+                if(contPedidosProcesados>0){
+                	printPedidosProcesados(pedidos, TP, client, TC, estado, TE);
+                }else{
+                    printf("\nNo hay pedidos procesados...\n");
                 }
                 limpiar();
                 break;
