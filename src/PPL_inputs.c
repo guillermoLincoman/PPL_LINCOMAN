@@ -306,3 +306,10 @@ int getString(char *guardar, char *mensaje, char *mensajeError, int rangoMin, in
 }
 
 
+float promedio(int numUno, int  numDos)
+{
+	float promedio;
+
+	promedio= (float) numUno / numDos;
+	return promedio;
+}

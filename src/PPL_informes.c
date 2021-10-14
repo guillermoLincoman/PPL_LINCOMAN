@@ -98,3 +98,50 @@ int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, eClient cliente[], 
 	return contador;
 }
 
+int cantPoliReciPromPorCliente(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado)
+{
+	int cantClientes;
+	int cantKilos;
+	float prom;
+
+	if(pedido != NULL && cliente != NULL && estado != NULL)
+	{
+		cantClientes= cantidadClientes(cliente, lenCliente);
+		cantKilos = cantidadKilos(pedido, lenPedido);
+		prom = promedio(cantKilos, cantClientes);
+	}
+	return prom;
+}
+int cantidadClientes(eClient cliente[], int lenCliente){
+	int contClientes;
+	int i;
+	contClientes=0;
+	if(cliente != NULL)
+	{
+		for (i = 0; i < lenCliente; ++i) {
+			if(cliente[i].isEmpty == OCUPADO){
+				contClientes++;
+			}
+		}
+	}
+	return contClientes;
+}
+
+int cantidadKilos(ePedido pedido[], int lenPedido)
+{
+	int acumKilos;
+	int i;
+	acumKilos=0;
+	if(pedido != NULL)
+	{
+		for (i = 0; i < lenPedido; ++i) {
+			if(pedido[i].isEmpty == OCUPADO && pedido[i].estado == PROCESADO){
+				acumKilos = acumKilos + pedido[i].kilos.kilosPP;
+			}
+		}
+	}
+	return acumKilos;
+}
+
+
+

@@ -133,6 +133,7 @@ int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido
 {
 
 	int aux;
+	float promedio;
 	int opcion;
 	char auxLocalidad[51];
 	aux=-1;
@@ -165,6 +166,9 @@ int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido
 	        	case 2:
 	        		if(contPedidosProcesados>0)
 	        		{
+
+	        			promedio = cantPoliReciPromPorCliente(pedido, lenPedido, clientes, lenCliente, estado, lenEstado);
+		    			printf("\n El promedio de kilos de polipropileno reciclado por cliente es  %.2f \n", promedio);
 
 	        		}else{
 	                    printf("\nAun no hay pedidos procesados...\n");

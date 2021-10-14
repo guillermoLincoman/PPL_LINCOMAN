@@ -30,5 +30,6 @@ int cargarUnEntero(char* mensaje, char* mensajeError,int rangoMin, int rangoMax,
 float cargarUnFloat(char* mensaje, char* mensajeError,int rangoMin, int rangoMax, int intentos);
 int getUsuario(char *guardar, char *mensaje, char *mensajeError, int rangoMin, int rangoMax, int intentos);
 int getString(char *guardar, char *mensaje, char *mensajeError, int rangoMin, int rangoMax, int intentos);
+float promedio(int numUno, int  numDos);
 
 #endif /* EXTRAS_H_ */

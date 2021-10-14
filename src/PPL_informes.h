@@ -16,4 +16,7 @@ void printPedidoPendiente(ePedido list, eEstado estado[], int lenEstado, eClient
 void printPedidosProcesados(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
 void printPedidoProcesado(ePedido list, eEstado estado[], int lenEstado, eClient cliente[], int lenCliente);
 int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, char localidad[]);
+int cantPoliReciPromPorCliente(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
+int cantidadClientes(eClient cliente[], int lenCliente);
+int cantidadKilos(ePedido pedido[], int lenPedido);
 #endif /* PPL_NEXO_H_ */
