@@ -10,11 +10,10 @@
 #define PPL_NEXO_H_
 
 
-void printClients(eClient list[], int len);
-void printClient(eClient list);
+
 void printPedidosPendientes(ePedido pedido[], int lenPedido,eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
 void printPedidoPendiente(ePedido list, eEstado estado[], int lenEstado, eClient cliente[], int lenCliente);
 void printPedidosProcesados(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
 void printPedidoProcesado(ePedido list, eEstado estado[], int lenEstado, eClient cliente[], int lenCliente);
-int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, char localidad[]);
+int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, char localidad[]);
 #endif /* PPL_NEXO_H_ */

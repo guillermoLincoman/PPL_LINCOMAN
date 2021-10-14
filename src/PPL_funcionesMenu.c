@@ -28,7 +28,7 @@ int agregarCliente(eClient list[], int len, int proxId)
     if(list != NULL)
     {
     	auxCliente = addClientNew(proxId);
-        aux=addClient(list, len, auxCliente.idCompany, auxCliente.name, auxCliente.cuit ,auxCliente.street, auxCliente.altitude, auxCliente.localidad);
+        aux=addClient(list, len, auxCliente.idCompany, auxCliente.name, auxCliente.cuit ,auxCliente.direccion.street, auxCliente.direccion.altitude, auxCliente.localidad);
         if(aux==0){
         	printf("\nCliente registrado con exito...\n");
             printf("________________________________________________________________________________________________________________\n");
@@ -46,7 +46,6 @@ int agregarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int lenP
 {
 	int aux;
 	int idCliente;
-	int i;
 	aux=-1;
 
 	if(clientes != NULL && pedido != NULL && estado != NULL)
@@ -57,9 +56,8 @@ int agregarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int lenP
 		ePedido auxPedido;
 		printClients(clientes, lenCliente);
 		idCliente = cargarUnEntero("Ingrese el id del cliente: ", "Error, ingrese un id de cliente valido: ", 1000, ultimoIdCliente-1, 4);
-		i = findClientById(clientes, lenCliente, idCliente);
-		auxPedido = addPedidoNew(idPedido, idCliente, clientes[i].cuit, clientes[i].localidad);
-		aux = addPedido(pedido, lenPedido, auxPedido.idPedido, auxPedido.cuitCliente, auxPedido.idEmpresa,auxPedido.kilosTotales, auxPedido.localidad);
+		auxPedido = addPedidoNew(idPedido, idCliente);
+		aux = addPedido(pedido, lenPedido, auxPedido.idPedido, auxPedido.idEmpresa,auxPedido.kilos.kilosTotales);
 		if(aux==0)
 		{
         	printf("\nPedido registrado con exito...\n");
@@ -91,7 +89,7 @@ int procesarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int len
 		id = cargarUnEntero("Ingrese el id del pedido: ", "Error, ingrese un id de cliente valido: ", 1, idPedido-1, 4);
 		ePedido auxPedido;
 		auxPedido = addPedidoNewProcesado();
-		i = addPedidoProcesado(pedido, id, lenPedido,auxPedido.kilosHDPE, auxPedido.kilosLPDE, auxPedido.kilosPP);
+		i = addPedidoProcesado(pedido, id, lenPedido, auxPedido.kilos.kilosHDPE, auxPedido.kilos.kilosLPDE, auxPedido.kilos.kilosPP);
 		printf("______________________________________________________________________________________________________________________________________________________________\n");
 		printf(" ID PEDIDO |  CUIT CLIENTE |          CALLE       |   ALTURA   |       LOCALIDAD      |  KILOS HDPE  |  KILOS LDPE  |  KILOS PP  |  TOTAL KILOS  |   ESTADO   |\n");
 		printf("___________|_______________|______________________|____________|______________________|______________|______________|____________|_______________|____________|\n");
@@ -131,7 +129,7 @@ void eliminarCliente(eClient list[], int len, int ultimoId)
 }
 
 
-int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido, int ultimoIdCliente)
+int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido, int ultimoIdCliente, int contPedidosPendientes, int contPedidosProcesados)
 {
 
 	int aux;
@@ -147,10 +145,30 @@ int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido
 	        switch(opcion)
 	        {
 	        	case 1:
-	    			printPedidosPendientes(pedido, lenPedido, clientes, lenCliente, estado, lenEstado);
-	    			getUsuario(auxLocalidad, "Ingrese una localidad: ", "Error, ingrese una localidad valida(maximo 51 caracteres): ", 1, 51, 4);
-	    			aux = cantPedidosPorLocalidad(pedido, lenPedido, auxLocalidad);
-	    			printf("\nLa localidad %s tiene %d pedidos pendientes\n", auxLocalidad, aux);
+	        		if(contPedidosPendientes>0)
+	        		{
+		    			printPedidosPendientes(pedido, lenPedido, clientes, lenCliente, estado, lenEstado);
+		    			getUsuario(auxLocalidad, "Ingrese una localidad: ", "Error, ingrese una localidad valida(maximo 51 caracteres): ", 1, 51, 4);
+		    			aux = cantPedidosPorLocalidad(pedido, lenPedido, clientes, lenCliente, auxLocalidad);
+		    			if(aux > 0)
+		    			{
+			    			printf("\nLa localidad %s tiene %d pedidos pendientes\n", auxLocalidad, aux);
+		    			}else{
+			    			printf("\nLa localidad %s no existe o no tiene pedidos pendientes....\n", auxLocalidad);
+		    			}
+	        		}else{
+	                    printf("\nNo hay pedidos pendientes...\n");
+	        		}
+
+	        		limpiar();
+	    			break;
+	        	case 2:
+	        		if(contPedidosProcesados>0)
+	        		{
+
+	        		}else{
+	                    printf("\nAun no hay pedidos procesados...\n");
+	        		}
 	        		limpiar();
 	    			break;
 	        }

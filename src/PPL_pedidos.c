@@ -58,22 +58,20 @@ int buscarLibrePedido(ePedido list[], int len)
  * \param int idNuevoEmpleado id del nuevo empleado a cargar
  * \return Devuelve  una estructura cargada con los datos ingresados por el usuario
 */
-ePedido addPedidoNew(int idNuevoPedido, int idCliente, int cuit, char localidad[])
+ePedido addPedidoNew(int idNuevoPedido, int idCliente)
 {
 	printf("\nINGRESE EL NUEVO PEDIDO\n");
 	printf("------------------------------------\n");
 	ePedido nuevoPedido;
-	nuevoPedido.idEmpresa = idCliente;
 	nuevoPedido.idPedido = idNuevoPedido;
-	nuevoPedido.cuitCliente = cuit;
-	strncpy(nuevoPedido.localidad, localidad, 40);
-	nuevoPedido.kilosTotales = cargarUnEntero("\nCantidad de kilos a recolectar: Kg ", "\nError, ingrese una cantidad de kilos valido (maximo 1000 Kg por pedido): ", 0, 1000, 4);
+	nuevoPedido.idEmpresa = idCliente;
+	nuevoPedido.kilos.kilosTotales = cargarUnEntero("\nCantidad de kilos a recolectar: Kg ", "\nError, ingrese una cantidad de kilos valido (maximo 1000 Kg por pedido): ", 0, 1000, 4);
 	nuevoPedido.estado = PENDIENTE;
 	printf("------------------------------------\n");
     return nuevoPedido;
 }
 
-int addPedido(ePedido list[], int len, int idPedido, int cuitCliente, int idEmpresa, int kilosTotales, char localidad[])
+int addPedido(ePedido list[], int len, int idPedido, int idEmpresa, int kilosTotales)
 {
 	int error;
 	int i;
@@ -83,11 +81,9 @@ int addPedido(ePedido list[], int len, int idPedido, int cuitCliente, int idEmpr
 		i = buscarLibrePedido(list, len);
 		if(i != -1){
 			error=0;
-			strncpy(list[i].localidad, localidad, 40);
 			list[i].idPedido = idPedido;
 			list[i].idEmpresa = idEmpresa;
-			list[i].cuitCliente = cuitCliente;
-			list[i].kilosTotales=kilosTotales;
+			list[i].kilos.kilosTotales=kilosTotales;
 			list[i].estado=PENDIENTE;
 			list[i].isEmpty=OCUPADO;
 		}
@@ -123,7 +119,6 @@ int findPedidoById(ePedido list[], int len,int id)
 }
 
 
-
 /** \brief Agrega a un estructura auxiliar los valores ingresados por el usuario
  * \param int idNuevoEmpleado id del nuevo empleado a cargar
  * \return Devuelve  una estructura cargada con los datos ingresados por el usuario
@@ -133,9 +128,9 @@ ePedido addPedidoNewProcesado()
 	printf("\nINGRESE EL NUEVO PEDIDO\n");
 	printf("------------------------------------\n");
 	ePedido nuevoPedido;
-	nuevoPedido.kilosHDPE = cargarUnEntero("\nCantidad de kilos HDPE recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg): ", 0, 1000, 4);
-	nuevoPedido.kilosLPDE = cargarUnEntero("\nCantidad de kilos LPDE recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg): ", 0, 1000, 4);
-	nuevoPedido.kilosPP = cargarUnEntero("\nCantidad de kilos PP recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg ): ", 0, 1000, 4);
+	nuevoPedido.kilos.kilosHDPE = cargarUnEntero("\nCantidad de kilos HDPE recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg): ", 0, 1000, 4);
+	nuevoPedido.kilos.kilosLPDE = cargarUnEntero("\nCantidad de kilos LPDE recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg): ", 0, 1000, 4);
+	nuevoPedido.kilos.kilosPP = cargarUnEntero("\nCantidad de kilos PP recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg ): ", 0, 1000, 4);
 	nuevoPedido.estado = PROCESADO;
 	printf("------------------------------------\n");
     return nuevoPedido;
@@ -148,10 +143,10 @@ int addPedidoProcesado(ePedido list[], int id, int len,int kilosHDPE, int kilosL
 	i = findPedidoById(list, len, id);
 	if(i != -1)
 	{
-		list[i].kilosHDPE = kilosHDPE;
-		list[i].kilosLPDE = kilosLPDE;
-		list[i].kilosPP = kilosPP;
-		list[i].kilosTotalesProcesados=kilosHDPE + kilosLPDE + kilosPP;
+		list[i].kilos.kilosHDPE = kilosHDPE;
+		list[i].kilos.kilosLPDE = kilosLPDE;
+		list[i].kilos.kilosPP = kilosPP;
+		list[i].kilos.kilosTotalesProcesados=kilosHDPE + kilosLPDE + kilosPP;
 		list[i].estado=PROCESADO;
 	}
 

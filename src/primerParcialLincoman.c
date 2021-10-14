@@ -114,12 +114,12 @@ int main()
                 if(contPedidosProcesados>0){
                 	printPedidosProcesados(pedidos, TP, client, TC, estado, TE);
                 }else{
-                    printf("\nNo hay pedidos procesados...\n");
+                    printf("\nAun no hay pedidos procesados...\n");
                 }
                 limpiar();
                 break;
             case 9:
-                informes(client, TC, pedidos, TP, estado, TE, idProxPedido, idProxTrabajo);
+                informes(client, TC, pedidos, TP, estado, TE, idProxPedido, idProxTrabajo, contPedidosPendientes, contPedidosProcesados);
                 limpiar();
                 break;
         }

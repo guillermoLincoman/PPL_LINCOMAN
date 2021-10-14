@@ -8,11 +8,16 @@
 
 struct
 {
+ char street[51];
+ int altitude;
+}typedef eDireccion;
+
+struct
+{
  int idCompany;
  char name[51];
  int cuit;
- char street[51];
- int altitude;
+ eDireccion direccion;
  char localidad[51];
  int isEmpty;
 }typedef eClient;
@@ -26,7 +31,9 @@ int BuscarLibre(eClient list[], int len);
 int addClient(eClient list[], int len, int id, char name[], int cuit, char street[], int altitude, char localidad[]);
 eClient addClientNew(int idNuevoCliente);
 int findClientById(eClient list[], int len,int id);
+int findClientByCuit(eClient list[], int len,int cuit);
 int removeClient(eClient list[], int len, int ultimoId);
 int modificarCliente(eClient list[], int len, int ultimoId);
-
+void printClients(eClient list[], int len);
+void printClient(eClient list);
 #endif /* ARRAYEMPLOYEES_H_ */

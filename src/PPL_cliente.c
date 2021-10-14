@@ -73,8 +73,8 @@ int addClient(eClient list[], int len, int id, char name[], int cuit, char stree
 			list[index].idCompany=id;
 			strncpy(list[index].name, name, 51);
 			list[index].cuit=cuit;
-			strncpy(list[index].street, street, 51);
-			list[index].altitude=altitude;
+			strncpy(list[index].direccion.street, street, 51);
+			list[index].direccion.altitude=altitude;
 			strncpy(list[index].localidad, localidad, 51);
 			list[index].isEmpty=OCUPADO;
 		}
@@ -97,8 +97,8 @@ eClient addClientNew(int idNuevoCliente)
 	printf("------------------------------------\n");
 	printf("\nINGRESAR DIRECCION\n");
 	printf("------------------------------------\n");
-	getUsuario(clienteNuevo.street, "\nCalle: ", "\nError, ingrese una calle valida (max 40 caracteres): ", 1, 40, 4);
-    clienteNuevo.altitude = cargarUnEntero("\nAltura: ", "\nError, ingrese un altura valida (entre 0 y 27300): ", 0, 27300, 4);
+	getUsuario(clienteNuevo.direccion.street, "\nCalle: ", "\nError, ingrese una calle valida (max 40 caracteres): ", 1, 40, 4);
+    clienteNuevo.direccion.altitude = cargarUnEntero("\nAltura: ", "\nError, ingrese un altura valida (entre 0 y 27300): ", 0, 27300, 4);
     getUsuario(clienteNuevo.localidad, "\nLocalidad: ", "\nError, ingrese una localidad valida (max 51 caracteres): ", 1, 51, 4);
 	printf("------------------------------------\n");
 
@@ -132,6 +132,32 @@ int findClientById(eClient list[], int len,int id)
  	return index;
 }
 
+/** \brief Busca un empleado por Id e indica en que posicion se encuentra
+ *
+ * \param Employee list[] = estructura de empleados
+ * \param len = tamaño de empleados[], tEmpleado.
+ * \param id = id del empleado buscado
+ * \return devuelve la posicion en la que se encuentra el empleado buscado
+ * \en caso de error devuelve -1
+ */
+int findClientByCuit(eClient list[], int len,int cuit)
+{
+	int i;
+ 	int index;
+ 	index=-1;
+ 	if(list != NULL)
+ 	{
+ 		for (i = 0; i < len; ++i) {
+			if(list[i].isEmpty == OCUPADO){
+				if(list[i].cuit == cuit){
+					index = i;
+					break;
+				}
+			}
+		}
+ 	}
+ 	return index;
+}
 
 /** \brief Elimina un empleado por ID
  *
@@ -162,8 +188,8 @@ int removeClient(eClient list[], int len, int ultimoId)
 			{
 				strncpy(list[i].name, " ", 51);
 				list[i].cuit = 0;
-				strncpy(list[i].street, " ", 51);
-				list[i].altitude=0;
+				strncpy(list[i].direccion.street, " ", 51);
+				list[i].direccion.altitude=0;
 				strncpy(list[i].localidad, " ", 51);
 				list[i].isEmpty=VACIO;
 		        printf("\nEl CLIENTE fue borrado con exito....\n\n");
@@ -218,7 +244,7 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         			printf("\nLa nueva calle es: %s\n", auxCadena);
         			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
         			if(confirmacion==1){
-        				strncpy(list[index].street, auxCadena, 51);
+        				strncpy(list[index].direccion.street, auxCadena, 51);
         				printf("\n La Calle fue modificada con exito...\n");
         			}else{
         				printf("\n La Calle NO fue modificada...\n");
@@ -229,7 +255,7 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         			printf("\nLa nueva Altura es: %d\n", auxNum);
         			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
         			if(confirmacion==1){
-                    	list[index].altitude = auxNum;
+                    	list[index].direccion.altitude = auxNum;
                     	printf("\n La Altura fue modificada con exito...\n");
         			}else{
         				printf("\n La Altura NO fue modificada...\n");
@@ -252,4 +278,38 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         }
     }
     return error;
+}
+
+/** \brief Muestra el contenido en la estructura de empleados
+ *
+ * \param Employee list[] = estructura de empleados
+ * \param len = tamaño de estructura empleados.
+
+ */
+void printClients(eClient list[], int len)
+{
+    int i;
+    printf("________________________________________________________________________________________________________________\n");
+    printf("                                               LISTADO DE CLIENTES                                              |\n");
+    printf("________________________________________________________________________________________________________________|\n");
+    printf("   ID EMPRESA  |    NOMBRE EMPRESA    |     CUIT     |          CALLE       |   ALTURA   |       LOCALIDAD      |\n");
+    printf("_______________|______________________|______________|______________________|____________|______________________|\n");
+    for(i=0; i<len; i++)
+    {
+    	if(list[i].isEmpty == OCUPADO)
+    	{
+    		printClient(list[i]);
+    	}
+    }
+}
+/** \brief Muestra el contenido de un empleado
+ *
+ * \param Employee list[] = estructura de empleados
+
+ */
+void printClient(eClient list)
+{
+    printf("----------------------------------------------------------------------------------------------------------------\n");
+    printf("     %4d      | %20s | %11d  | %20s |   %6d   | %20s  \n", list.idCompany, list.name, list.cuit, list.direccion.street, list.direccion.altitude, list.localidad);
+    printf("----------------------------------------------------------------------------------------------------------------\n");
 }
