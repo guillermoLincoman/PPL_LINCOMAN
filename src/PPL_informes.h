@@ -19,9 +19,8 @@ int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, eClient cliente[], 
 int cantPoliReciPromPorCliente(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
 int cantidadClientes(eClient cliente[], int lenCliente);
 int cantidadKilos(ePedido pedido[], int lenPedido);
-int clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
-int clienteConMasPedidosPendientes(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
-int clienteConMasPedidosProcesados(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado);
+void clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente);
+void clienteConMasPedidosEstado(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado, int criterio);
 
 
 #endif /* PPL_NEXO_H_ */

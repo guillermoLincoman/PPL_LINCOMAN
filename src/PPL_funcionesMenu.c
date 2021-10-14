@@ -227,7 +227,7 @@ int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido
 	{
 		do{
 			menuInformes();
-	        opcion=cargarUnEntero("Elija una opcion: ", "Elija una opcion entre 0 y 2: ", 0, 2, 4);
+	        opcion=cargarUnEntero("Elija una opcion: ", "Elija una opcion entre 0 y 2: ", 0, 3, 4);
 
 	        switch(opcion)
 	        {
@@ -261,11 +261,19 @@ int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido
 	        		}
 	        		limpiar();
 	    			break;
+	        	case 3:
+	        		if(contPedidosPendientes>0)
+	        		{
+
+	        			clienteConMasPedidos(pedido, lenPedido, clientes, lenCliente);
+	        		}else{
+	                    printf("\nAun no hay pedidos...\n");
+	        		}
+	        		limpiar();
+	    			break;
 	        }
 
 		}while(opcion != 0);
-
-
 	}
 
 	return aux;

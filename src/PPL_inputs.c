@@ -31,6 +31,8 @@ void menuInformes()
     printf("*********************************************************************************************************************\n");
     printf("| 1. Ingresar una localidad e indicar la cantidad de pedidos pendientes para dicha localidad.                       |\n");
     printf("| 2. Cantidad de kilos de polipropileno reciclado promedio por cliente. (kilos totales / cantidad de clientes)	    |\n");
+    printf("| 3. Cliente con más pedidos.                                                                                  	    |\n");
+    printf("| 4. Cliente con más pedidos pendientes.                                                                       	    |\n");
     printf("| 0. SALIR                                                                                                          |\n");
     printf("*********************************************************************************************************************\n");
 }
@@ -301,7 +303,6 @@ int getString(char *guardar, char *mensaje, char *mensajeError, int rangoMin, in
     		intentos--;
     	  }
     }
-
     return error;
 }
 
@@ -318,4 +319,26 @@ float promedio(int numUno, int  numDos)
 
 	promedio= (float) numUno / numDos;
 	return promedio;
+}
+
+int numeroMayor(int array[], int tam)
+{
+	int i;
+	int numMayor;
+
+	for (i = 0; i < tam; ++i) {
+		if(i==0 || numMayor<array[i])
+		{
+			numMayor = array[i];
+		}
+	}
+	return numMayor;
+}
+
+void initCont(int array[], int tam)
+{
+	int i;
+	for (i = 0; i < tam; ++i) {
+		array[i] = 0;
+	}
 }

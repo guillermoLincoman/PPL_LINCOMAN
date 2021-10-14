@@ -210,16 +210,14 @@ int cantidadKilos(ePedido pedido[], int lenPedido)
 	return acumKilos;
 }
 
-int clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado)
+void clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente)
 {
-	int aux;
 	int i;
 	int j;
 	int arrayCont[lenCliente];
 	int numMayor;
-	aux=-1;
-
-	if(pedido != NULL && cliente != NULL && estado != NULL)
+	initCont(arrayCont, lenCliente);
+	if(pedido != NULL && cliente != NULL)
 	{
 		for (i = 0; i < lenPedido; ++i) {
 			if(pedido[i].isEmpty==OCUPADO)
@@ -229,29 +227,27 @@ int clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], int
 					if(pedido[i].idEmpresa==cliente[j].idCompany)
 					{
 						arrayCont[j]++;
-						aux=0;
 					}
 				}
-				numMayor = numeroMayor(arrayCont, lenCliente);
-				for (i = 0; i < lenCliente; ++i) {
-					if(arrayCont[i] == numMayor)
-					{
-						printf("El cliente con mas pedidos tiene %d pedidos y es:\n", numMayor);
-						printClient(cliente[i]);
-					}
-				}
-
+			}
+		}
+		numMayor = numeroMayor(arrayCont, lenCliente);
+		for (i = 0; i < lenCliente; ++i) {
+			if(arrayCont[i] == numMayor)
+			{
+				printf("El cliente con mas pedidos tiene %d pedidos y es:\n", numMayor);
+				printClient(cliente[i]);
 			}
 		}
 	}
-
-	return aux;
 }
 
-int numeroMayor(int array[], int tam)
-{
-	int i;
-	int numMayor;
 
-	return numMayor;
+void clienteConMasPedidosEstado(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado, int criterio)
+{
+
+	if(pedido != NULL && cliente != NULL)
+	{
+
+	}
 }
