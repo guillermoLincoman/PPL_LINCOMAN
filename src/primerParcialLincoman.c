@@ -4,7 +4,7 @@
  Author      : Guillermo Lincoman
  Version     :
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Description : Primer Parcial Programacion 1°E Guillermo Lincoman
  ============================================================================
  */
 #include "PPL_funcionesMenu.h"

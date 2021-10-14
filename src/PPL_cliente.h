@@ -14,11 +14,16 @@ struct
 
 struct
 {
+ char localidad[51];
+}typedef eLocation;
+
+struct
+{
  int idCompany;
  char name[51];
  int cuit;
  eDireccion direccion;
- char localidad[51];
+ eLocation location;
  int isEmpty;
 }typedef eClient;
 

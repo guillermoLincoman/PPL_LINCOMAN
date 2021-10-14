@@ -90,7 +90,7 @@ int addClient(eClient list[], int len, int id, char name[], int cuit, char stree
 			list[index].cuit=cuit;
 			strncpy(list[index].direccion.street, street, 51);
 			list[index].direccion.altitude=altitude;
-			strncpy(list[index].localidad, localidad, 51);
+			strncpy(list[index].location.localidad, localidad, 51);
 			list[index].isEmpty=OCUPADO;
 		}
 	}
@@ -116,7 +116,7 @@ eClient addClientNew(int idNuevoCliente)
 	printf("------------------------------------\n");
 	getUsuario(clienteNuevo.direccion.street, "\nCalle: ", "\nError, ingrese una calle valida (max 40 caracteres): ", 1, 40, 4);
     clienteNuevo.direccion.altitude = cargarUnEntero("\nAltura: ", "\nError, ingrese un altura valida (entre 0 y 27300): ", 0, 27300, 4);
-    getUsuario(clienteNuevo.localidad, "\nLocalidad: ", "\nError, ingrese una localidad valida (max 51 caracteres): ", 1, 51, 4);
+    getUsuario(clienteNuevo.location.localidad, "\nLocalidad: ", "\nError, ingrese una localidad valida (max 51 caracteres): ", 1, 51, 4);
 	printf("------------------------------------\n");
 
     return clienteNuevo;
@@ -180,7 +180,7 @@ int removeClient(eClient list[], int len, int ultimoId)
 				list[i].cuit = 0;
 				strncpy(list[i].direccion.street, " ", 51);
 				list[i].direccion.altitude=0;
-				strncpy(list[i].localidad, " ", 51);
+				strncpy(list[i].location.localidad, " ", 51);
 				list[i].isEmpty=VACIO;
 		        printf("\nEl CLIENTE fue borrado con exito....\n\n");
 				error=0;
@@ -265,7 +265,7 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         			printf("\nLa nueva Localidad es: %s\n", auxCadena);
         			confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
         			if(confirmacion==1){
-                		strncpy(list[index].localidad, auxCadena, 51);
+                		strncpy(list[index].location.localidad, auxCadena, 51);
                 		printf("\n La Localidad fue modificada con exito...\n");
                         error=0;
         			}else{
@@ -311,6 +311,6 @@ void printClients(eClient list[], int len)
 void printClient(eClient list)
 {
     printf("----------------------------------------------------------------------------------------------------------------\n");
-    printf("     %4d      | %20s | %11d  | %20s |   %6d   | %20s  \n", list.idCompany, list.name, list.cuit, list.direccion.street, list.direccion.altitude, list.localidad);
+    printf("     %4d      | %20s | %11d  | %20s |   %6d   | %20s  \n", list.idCompany, list.name, list.cuit, list.direccion.street, list.direccion.altitude, list.location.localidad);
     printf("----------------------------------------------------------------------------------------------------------------\n");
 }

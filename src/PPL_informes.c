@@ -48,7 +48,7 @@ void printPedidoPendiente(ePedido list, eEstado estado[], int lenEstado, eClient
 		if(list.estado == PENDIENTE){
 			if(list.estado == estado[i].estado){
 						printf("---------------------------------------------------------------------------------------------------------------------\n");
-						printf("   %6d  |  %11d  | %20s |   %6d   | %20s |      %6d     | %10s \n", list.idPedido ,cliente[j].cuit, cliente[j].direccion.street, cliente[j].direccion.altitude, cliente[j].localidad, list.kilos.kilosTotales, estado[i].descripcion);
+						printf("   %6d  |  %11d  | %20s |   %6d   | %20s |      %6d     | %10s \n", list.idPedido ,cliente[j].cuit, cliente[j].direccion.street, cliente[j].direccion.altitude, cliente[j].location.localidad, list.kilos.kilosTotales, estado[i].descripcion);
 						printf("---------------------------------------------------------------------------------------------------------------------\n");
 						break;
 			}
@@ -101,7 +101,7 @@ void printPedidoProcesado(ePedido list, eEstado estado[], int lenEstado, eClient
 		{
 			if(list.estado == estado[i].estado){
 					printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-					printf("   %6d  |  %11d  | %20s |   %6d   | %20s |    %6d    |    %6d    |   %6d   |    %6d     | %10s\n", list.idPedido ,cliente[j].cuit, cliente[j].direccion.street, cliente[j].direccion.altitude, cliente[j].localidad, list.kilos.kilosHDPE, list.kilos.kilosLPDE, list.kilos.kilosPP ,list.kilos.kilosTotalesProcesados, estado[i].descripcion);
+					printf("   %6d  |  %11d  | %20s |   %6d   | %20s |    %6d    |    %6d    |   %6d   |    %6d     | %10s\n", list.idPedido ,cliente[j].cuit, cliente[j].direccion.street, cliente[j].direccion.altitude, cliente[j].location.localidad, list.kilos.kilosHDPE, list.kilos.kilosLPDE, list.kilos.kilosPP ,list.kilos.kilosTotalesProcesados, estado[i].descripcion);
 					printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 					break;
 			}
@@ -130,7 +130,7 @@ int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, eClient cliente[], 
 		for (i = 0; i < lenPedido; ++i) {
 			if(pedido[i].estado == PENDIENTE){
 				j = findClientById(cliente, lenCliente, pedido[i].idEmpresa);
-					if(strcmp(cliente[j].localidad, localidad)==0){
+					if(strcmp(cliente[j].location.localidad, localidad)==0){
 						contador++;
 					}
 			}
@@ -208,4 +208,50 @@ int cantidadKilos(ePedido pedido[], int lenPedido)
 		}
 	}
 	return acumKilos;
+}
+
+int clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado)
+{
+	int aux;
+	int i;
+	int j;
+	int arrayCont[lenCliente];
+	int numMayor;
+	aux=-1;
+
+	if(pedido != NULL && cliente != NULL && estado != NULL)
+	{
+		for (i = 0; i < lenPedido; ++i) {
+			if(pedido[i].isEmpty==OCUPADO)
+			{
+				//1. Cargo el array de contadores
+				for (j = 0; j < lenCliente; ++j) {
+					if(pedido[i].idEmpresa==cliente[j].idCompany)
+					{
+						arrayCont[j]++;
+						aux=0;
+					}
+				}
+				numMayor = numeroMayor(arrayCont, lenCliente);
+				for (i = 0; i < lenCliente; ++i) {
+					if(arrayCont[i] == numMayor)
+					{
+						printf("El cliente con mas pedidos tiene %d pedidos y es:\n", numMayor);
+						printClient(cliente[i]);
+					}
+				}
+
+			}
+		}
+	}
+
+	return aux;
+}
+
+int numeroMayor(int array[], int tam)
+{
+	int i;
+	int numMayor;
+
+	return numMayor;
 }

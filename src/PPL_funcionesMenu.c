@@ -49,7 +49,7 @@ int agregarCliente(eClient list[], int len, int proxId)
     if(list != NULL)
     {
     	auxCliente = addClientNew(proxId);
-        aux=addClient(list, len, auxCliente.idCompany, auxCliente.name, auxCliente.cuit ,auxCliente.direccion.street, auxCliente.direccion.altitude, auxCliente.localidad);
+        aux=addClient(list, len, auxCliente.idCompany, auxCliente.name, auxCliente.cuit ,auxCliente.direccion.street, auxCliente.direccion.altitude, auxCliente.location.localidad);
         if(aux==0){
         	printf("\nCliente registrado con exito...\n");
             printf("________________________________________________________________________________________________________________\n");
