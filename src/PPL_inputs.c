@@ -41,7 +41,7 @@ void limpiar()
     system("pause");
     system("cls");
 }
-
+//retorna 1 si no hay numeros y 0 si hay numeros
 int validarLetra(char num[])
 {
    int i=0;
@@ -305,7 +305,13 @@ int getString(char *guardar, char *mensaje, char *mensajeError, int rangoMin, in
     return error;
 }
 
-
+/** \brief Obtiene el promerio de 2 numeros
+ *
+ * \param int numUno = primer numero recibido
+ * \param int numDos = segundo numero recibido
+ *
+ * \return Retorna el promedio de la operacion
+ */
 float promedio(int numUno, int  numDos)
 {
 	float promedio;

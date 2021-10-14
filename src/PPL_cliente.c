@@ -7,12 +7,12 @@
 #include "PPL_cliente.h"
 
 
-/** \brief Indica que todas las posiciones de la estructura estan vacias,
- * Inicializa isEmpty en VACIO (-1)
- * en todas las posiciones de la estructura.
- * \param estructura eEmpleado.
- * \param tamaño de la estructura eEmpleado.
- * \return Devuelve -1 si hay un error y 0 si no hay errores.
+/** \brief Inicializa todas las posiciones de una estructura en VACIO(-1)
+ *
+ * \param eClient list[] = estructura de clientes.
+ * \param int len = tamaño de la estructura.
+ *
+ * \return Retorna 0 si la operacion es exitosa y -1 en caso de error.
  */
 int initClient(eClient list[], int len)
 {
@@ -29,12 +29,12 @@ int initClient(eClient list[], int len)
  return error;
 }
 
-/** \brief Busca un lugar libre en la estructura,
- * Busca dentro de la estructura un indice
- * en cual la variable isEmpty se igual a VACIO
- * \param list = estructura Employee.
- * \param len = tamaño de la estructura Employee.
- * \return devuelve un indice vacio, en caso de error devuelve -1
+/** \brief Busca un lugar libre en la estructura
+ *
+ * \param eClient list[] = estructura de clientes.
+ * \param int len = tamaño de la estructura.
+ *
+ * \return Retorna el indice donde se encuentra el lugar libre o -1 en caso de error.
  */
 int BuscarLibre(eClient list[], int len)
 {
@@ -60,6 +60,21 @@ int BuscarLibre(eClient list[], int len)
  * \param int idNuevoEmpleado id del nuevo empleado a cargar
  * \return Devuelve -1 si hay un error y 0 si se cargo el empleado
 */
+
+/** \brief Asigna valores ingresados por el usuario a la estructura en un lugar libre
+ * Utiliza la funcion Buscar libre para encontrar un lugar en la estrucutra
+ *
+ * \param eClient list[] = estructura de clientes.
+ * \param int len = Tamaño de la estructura.
+ * \param int id = Id del cliente.
+ * \param char name[] = Nombre de la empresa del cliente
+ * \param int cuit = Cuit de la empresa
+ * \param char street[] = Calle de cliente
+ * \param int altitude = Altura de direccion del cliente
+ * \param char localidad[] = Localidad del cliente
+ *
+ * \return Retorna 0 si la operacion es exitosa y -1 en caso de error.
+ */
 int addClient(eClient list[], int len, int id, char name[], int cuit, char street[], int altitude, char localidad[])
 {
 	int error;
@@ -82,9 +97,11 @@ int addClient(eClient list[], int len, int id, char name[], int cuit, char stree
 	return error;
 }
 
-/** \brief Agrega a un estructura auxiliar los valores ingresados por el usuario
- * \param int idNuevoEmpleado id del nuevo empleado a cargar
- * \return Devuelve  una estructura cargada con los datos ingresados por el usuario
+/** \brief Carga una estrucutura auxiliar con datos cargados por el usuario
+ *
+ * \param int idNuevoCliente = id del nuevo empleado a cargar
+ *
+ * \return Retorna  una estructura cargada con los datos ingresados por el usuario
 */
 eClient addClientNew(int idNuevoCliente)
 {
@@ -105,13 +122,13 @@ eClient addClientNew(int idNuevoCliente)
     return clienteNuevo;
 }
 
-/** \brief Busca un empleado por Id e indica en que posicion se encuentra
+/** \brief Busca un cliente por Id
  *
- * \param Employee list[] = estructura de empleados
- * \param len = tamaño de empleados[], tEmpleado.
- * \param id = id del empleado buscado
- * \return devuelve la posicion en la que se encuentra el empleado buscado
- * \en caso de error devuelve -1
+ * \param eClient list[] = estructura de clientes
+ * \param len = tamaño de la estructura clientes
+ * \param id = id del cliente buscado
+ *
+ * \return Retorna la posicion del cliente que coincide con el id buscado, en caso de error devuelve -1
  */
 int findClientById(eClient list[], int len,int id)
 {
@@ -132,40 +149,13 @@ int findClientById(eClient list[], int len,int id)
  	return index;
 }
 
-/** \brief Busca un empleado por Id e indica en que posicion se encuentra
+/** \brief Elimina un cliente segun el ID
  *
- * \param Employee list[] = estructura de empleados
- * \param len = tamaño de empleados[], tEmpleado.
- * \param id = id del empleado buscado
- * \return devuelve la posicion en la que se encuentra el empleado buscado
- * \en caso de error devuelve -1
- */
-int findClientByCuit(eClient list[], int len,int cuit)
-{
-	int i;
- 	int index;
- 	index=-1;
- 	if(list != NULL)
- 	{
- 		for (i = 0; i < len; ++i) {
-			if(list[i].isEmpty == OCUPADO){
-				if(list[i].cuit == cuit){
-					index = i;
-					break;
-				}
-			}
-		}
- 	}
- 	return index;
-}
-
-/** \brief Elimina un empleado por ID
+ * \param eClient list[] = estructura de clientes
+ * \param int len = tamaño de la estructura clientes
+ * \param int ultimoId = ultimo id ingresado para validar el maximo de id que se puede ingresar
  *
- * \param Employee list[] = estructura de empleados
- * \param len = tamaño de estructura empleados.
- * \param ultimoId = ultimo id ingresado para validar el maximo de id que se puede ingresar
- *
- * \return Devuelve -1 si hay un error y 0 si se elimino el empleado
+ * \return Retorna -1 si hay un error y 0 si se elimino el cliente
  */
 int removeClient(eClient list[], int len, int ultimoId)
 {
@@ -203,6 +193,14 @@ int removeClient(eClient list[], int len, int ultimoId)
 	return error;
 }
 
+/** \brief Modifica un cliente segun el ID
+ *
+ * \param eClient list[] = estructura de clientes
+ * \param int len = tamaño de la estructura clientes
+ * \param int ultimoId = ultimo id ingresado para validar el maximo de id que se puede ingresar
+ *
+ * \return Retorna -1 si hay un error y 0 si se modifico el cliente
+ */
 int modificarCliente(eClient list[], int len, int ultimoId)
 {
     int auxId;
@@ -223,7 +221,6 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         {
         do{
         	limpiar();
-            error=0;
             printf("\n________________________________________________________________________________________________________________\n");
             printf("   ID EMPRESA  |    NOMBRE EMPRESA    |     CUIT     |          CALLE       |   ALTURA   |       LOCALIDAD      |\n");
             printf("----------------------------------------------------------------------------------------------------------------\n");
@@ -246,6 +243,7 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         			if(confirmacion==1){
         				strncpy(list[index].direccion.street, auxCadena, 51);
         				printf("\n La Calle fue modificada con exito...\n");
+        	            error=0;
         			}else{
         				printf("\n La Calle NO fue modificada...\n");
         			}
@@ -257,6 +255,7 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         			if(confirmacion==1){
                     	list[index].direccion.altitude = auxNum;
                     	printf("\n La Altura fue modificada con exito...\n");
+                        error=0;
         			}else{
         				printf("\n La Altura NO fue modificada...\n");
         			}
@@ -268,6 +267,7 @@ int modificarCliente(eClient list[], int len, int ultimoId)
         			if(confirmacion==1){
                 		strncpy(list[index].localidad, auxCadena, 51);
                 		printf("\n La Localidad fue modificada con exito...\n");
+                        error=0;
         			}else{
         				printf("\n La Localidad NO fue modificada...\n");
         			}
@@ -280,10 +280,10 @@ int modificarCliente(eClient list[], int len, int ultimoId)
     return error;
 }
 
-/** \brief Muestra el contenido en la estructura de empleados
+/** \brief Muestra todos los clientes cargados
  *
- * \param Employee list[] = estructura de empleados
- * \param len = tamaño de estructura empleados.
+ * \param eClient list[] = Estructura de Clientes
+ * \param len = Tamaño de estructura Clientes.
 
  */
 void printClients(eClient list[], int len)
@@ -302,9 +302,10 @@ void printClients(eClient list[], int len)
     	}
     }
 }
-/** \brief Muestra el contenido de un empleado
+
+/** \brief Muestra un cliente
  *
- * \param Employee list[] = estructura de empleados
+ * \param eClient list = Estructura de Cliente a imprimir
 
  */
 void printClient(eClient list)

@@ -6,13 +6,12 @@
  */
 #include "PPL_pedidos.h"
 
-
-/** \brief Indica que todas las posiciones de la estructura estan vacias,
- * Inicializa isEmpty en VACIO (-1)
- * en todas las posiciones de la estructura.
- * \param estructura eEmpleado.
- * \param tamaño de la estructura eEmpleado.
- * \return Devuelve -1 si hay un error y 0 si no hay errores.
+/** \brief Inicializa todas las posiciones de una estructura en VACIO(-1)
+ *
+ * \param ePedido list[] = Estructura de Pedidos.
+ * \param int len = Tamaño de la Estructura.
+ *
+ * \return Retorna 0 si la operacion es exitosa y -1 en caso de error.
  */
 int initPedidos(ePedido list[], int len)
 {
@@ -29,12 +28,12 @@ int initPedidos(ePedido list[], int len)
  return error;
 }
 
-/** \brief Busca un lugar libre en la estructura,
- * Busca dentro de la estructura un indice
- * en cual la variable isEmpty se igual a VACIO
- * \param list = estructura Employee.
- * \param len = tamaño de la estructura Employee.
- * \return devuelve un indice vacio, en caso de error devuelve -1
+/** \brief Busca un lugar libre en la estructura
+ *
+ * \param eClient list[] = Estructura de Pedidos.
+ * \param int len = tamaño de la estructura.
+ *
+ * \return Retorna el indice donde se encuentra el lugar libre o -1 en caso de error.
  */
 int buscarLibrePedido(ePedido list[], int len)
 {
@@ -53,10 +52,12 @@ int buscarLibrePedido(ePedido list[], int len)
 	return index;
 }
 
-
-/** \brief Agrega a un estructura auxiliar los valores ingresados por el usuario
- * \param int idNuevoEmpleado id del nuevo empleado a cargar
- * \return Devuelve  una estructura cargada con los datos ingresados por el usuario
+/** \brief Carga una estrucutura auxiliar con datos cargados por el usuario
+ *
+ * \param int idNuevoPedido = id del nuevo pedido a cargar
+ * \param int idCliente = id del cliente que realiza el pedido
+ *
+ * \return Retorna  una estructura cargada con los datos ingresados por el usuario
 */
 ePedido addPedidoNew(int idNuevoPedido, int idCliente)
 {
@@ -71,6 +72,17 @@ ePedido addPedidoNew(int idNuevoPedido, int idCliente)
     return nuevoPedido;
 }
 
+/** \brief Asigna valores ingresados por el usuario a la estructura en un lugar libre
+ * Utiliza la funcion BuscarlibrePedido para encontrar un lugar en la estrucutra
+ *
+ * \param ePedido list[] = Estructura de Pedido.
+ * \param int len = Tamaño de la Estructura.
+ * \param int idPedido = Id del Pedido.
+ * \param int idEmpresa = Id de la Empresa.
+ * \param int kilosTotales = Kilos totales del pedido.
+ *
+ * \return Retorna 0 si la operacion es exitosa y -1 en caso de error.
+ */
 int addPedido(ePedido list[], int len, int idPedido, int idEmpresa, int kilosTotales)
 {
 	int error;
@@ -91,13 +103,13 @@ int addPedido(ePedido list[], int len, int idPedido, int idEmpresa, int kilosTot
 	return error;
 }
 
-/** \brief Busca un empleado por Id e indica en que posicion se encuentra
+/** \brief Busca un pedido por Id
  *
- * \param Employee list[] = estructura de empleados
- * \param len = tamaño de empleados[], tEmpleado.
- * \param id = id del empleado buscado
- * \return devuelve la posicion en la que se encuentra el empleado buscado
- * \en caso de error devuelve -1
+ * \param ePedido list[] = Estructura de Pedidos
+ * \param len = Tamaño de la estructura Pedidos
+ * \param id = id del Pedido buscado
+ *
+ * \return Retorna la posicion del Pedido que coincide con el id buscado, en caso de error devuelve -1
  */
 int findPedidoById(ePedido list[], int len,int id)
 {
@@ -119,13 +131,13 @@ int findPedidoById(ePedido list[], int len,int id)
 }
 
 
-/** \brief Agrega a un estructura auxiliar los valores ingresados por el usuario
- * \param int idNuevoEmpleado id del nuevo empleado a cargar
+/** \brief Carga una estructura auxiliar con los valores del pedido procesado
+
  * \return Devuelve  una estructura cargada con los datos ingresados por el usuario
 */
 ePedido addPedidoNewProcesado()
 {
-	printf("\nINGRESE EL NUEVO PEDIDO\n");
+	printf("\nINGRESE LOS PESOS OBTENIDOS EN LE PROCESO\n");
 	printf("------------------------------------\n");
 	ePedido nuevoPedido;
 	nuevoPedido.kilos.kilosHDPE = cargarUnEntero("\nCantidad de kilos HDPE recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg): ", 0, 1000, 4);
@@ -136,6 +148,18 @@ ePedido addPedidoNewProcesado()
     return nuevoPedido;
 }
 
+/** \brief Asigna valores ingresados por el usuario a la estructura en un lugar libre
+ * Utiliza la funcion findPedidoById para encontrar la estructura con el pedido pendiente
+ *
+ * \param ePedido list[] = Estructura de Pedidos.
+ * \param int len = Tamaño de la Estructura.
+ * \param int id = Id del Pedido para encontrarlo y cargar los nuevos datos.
+ * \param int kilosHDPE = Cantidad de kilos de Polietileno de alta densidad
+ * \param int kilosLPDE = Cantidad de kilos de Polietileno de baja densidad.
+ * \param int kilosPP = Cantidad de kilos de Polipropileno.
+ *
+ * \return Retorna 0 si la operacion es exitosa y -1 en caso de error.
+ */
 int addPedidoProcesado(ePedido list[], int id, int len,int kilosHDPE, int kilosLPDE, int kilosPP)
 {
 	int i;

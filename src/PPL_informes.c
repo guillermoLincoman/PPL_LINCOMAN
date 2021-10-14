@@ -6,7 +6,15 @@
  */
 #include "PPL_informes.h"
 
-
+/** \brief Muestra todos los Pedidos pendientes cargados
+ *
+ * \param ePedido pedido[] = Estructura de Pedido
+ * \param lenPedido = Tamaño de estructura Pedido.
+ * \param eClient cliente[] = Estructura de Clientes
+ * \param lenCliente = Tamaño de estructura Clientes.
+ * \param eEstado estado[] = Estructura de Estado
+ * \param lenEstado = Tamaño de estructura Estado.
+ */
 void printPedidosPendientes(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado)
 {
     int i;
@@ -24,6 +32,13 @@ void printPedidosPendientes(ePedido pedido[], int lenPedido, eClient cliente[], 
     }
 }
 
+/** \brief Muestra un Pedido pendiente
+ *
+ * \param eClient Cliente = Estructura de Cliente a imprimir
+ * \param eEstado Estado = Estructura de Estado a imprimir
+ * \param ePedido Pedido = Estructura de Pedido a imprimir
+
+ */
 void printPedidoPendiente(ePedido list, eEstado estado[], int lenEstado, eClient cliente[], int lenCliente)
 {
 	int i;
@@ -41,9 +56,15 @@ void printPedidoPendiente(ePedido list, eEstado estado[], int lenEstado, eClient
 	}
 }
 
-
-
-
+/** \brief Muestra todos los Pedidos Procesados cargados
+ *
+ * \param ePedido pedido[] = Estructura de Pedido
+ * \param lenPedido = Tamaño de estructura Pedido.
+ * \param eClient cliente[] = Estructura de Clientes
+ * \param lenCliente = Tamaño de estructura Clientes.
+ * \param eEstado estado[] = Estructura de Estado
+ * \param lenEstado = Tamaño de estructura Estado.
+ */
 void printPedidosProcesados(ePedido pedido[], int lenPedido,eClient cliente[], int lenCliente, eEstado estado[], int lenEstado)
 {
     int i;
@@ -61,6 +82,15 @@ void printPedidosProcesados(ePedido pedido[], int lenPedido,eClient cliente[], i
     }
 }
 
+/** \brief Muestra un Pedido Procesado
+ *
+ * \param eClient Cliente[] = Estructura de Cliente a imprimir
+ * \param int lenCliente = Tamaño de estructura Cliente
+ * \param eEstado Estado[] = Estructura de Estado a imprimir
+ * \param int lenEstado = Tamaño de estructura Estado
+ * \param ePedido Pedido = Estructura de Pedido a imprimir
+
+ */
 void printPedidoProcesado(ePedido list, eEstado estado[], int lenEstado, eClient cliente[], int lenCliente)
 {
 	int i;
@@ -80,6 +110,16 @@ void printPedidoProcesado(ePedido list, eEstado estado[], int lenEstado, eClient
 	}
 }
 
+/** \brief Obtiene la cantidad de pedidos segun la localidad recibida
+ *
+ * \param ePedido Pedido[] = Estructura de Pedido
+ * \param int lenPedido = Tamaño de estructura Pedido
+ * \param eClient cliente[] = Estructura de Estado
+ * \param int lenCliente = Tamaño de estructura Estado
+ * \param char localidad[] = localidad recibida para comparar
+ *
+ * \return Retorna la cantidad de pedidos por localidad
+ */
 int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, char localidad[])
 {
 	int contador;
@@ -98,6 +138,17 @@ int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, eClient cliente[], 
 	return contador;
 }
 
+/** \brief Obtiene el promedio de kilos de Polipropileno por cliente
+ *
+ * \param ePedido Pedido[] = Estructura de Pedido
+ * \param int lenPedido = Tamaño de estructura Pedido
+ * \param eClient cliente[] = Estructura de Cliente
+ * \param int lenCliente = Tamaño de estructura Cliente
+ * \param eEstado estado[] = Estructura de Estado
+ * \param int lenEstado = Tamaño de estructura Estado
+ *
+ * \return Retorna el promedio de kilos de Polipropileno por cliente
+ */
 int cantPoliReciPromPorCliente(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado)
 {
 	int cantClientes;
@@ -112,6 +163,14 @@ int cantPoliReciPromPorCliente(ePedido pedido[], int lenPedido, eClient cliente[
 	}
 	return prom;
 }
+
+/** \brief Obtiene la cantidad de clientes cargados en la estructura
+ *
+ * \param eClient cliente[] = Estructura de Cliente
+ * \param int lenCliente = Tamaño de estructura Cliente
+ *
+ * \return Retorna la cantidad de clientes cargados
+ */
 int cantidadClientes(eClient cliente[], int lenCliente){
 	int contClientes;
 	int i;
@@ -127,6 +186,14 @@ int cantidadClientes(eClient cliente[], int lenCliente){
 	return contClientes;
 }
 
+/** \brief Obtiene la cantidad de kilos de Polipropileno
+ *  de todos los pedidos procesados
+ *
+ * \param ePedido pedido[] = Estructura de Pedidos
+ * \param int lenPedido = Tamaño de estructura Pedidos
+ *
+ * \return Retorna la cantidad de kilos de Polipropileno de todos los pedidos procesados
+ */
 int cantidadKilos(ePedido pedido[], int lenPedido)
 {
 	int acumKilos;
@@ -142,6 +209,3 @@ int cantidadKilos(ePedido pedido[], int lenPedido)
 	}
 	return acumKilos;
 }
-
-
-

@@ -6,6 +6,15 @@
  */
 #include "PPL_funcionesMenu.h"
 
+/** \brief Inicia las 2 estructuras usadas en el programa
+ *
+ * \param eClient list[] = Estructura de Cliente
+ * \param int lenCliente = Tamaño de estructura Cliente
+ * \param ePedido Pedido[] = Estructura de Pedido
+ * \param int lenPedido = Tamaño de estructura Pedido
+ *
+ * \return Si se inicializan las estructuras retorna 0 en caso de error retorna -1
+ */
 int iniciar(eClient list[], int len, ePedido pedido[], int lenPedido)
 {
     int aux;
@@ -20,6 +29,18 @@ int iniciar(eClient list[], int len, ePedido pedido[], int lenPedido)
     return error;
 }
 
+/** \brief Agrega un cliente al programa
+ *
+ *	Carga en una estructura auxiliar una Cliente utilizando la funcion addClientNew,
+ *	con los datos obtenidos le da los datos a la funcion addClient en caso de cargar el cliente
+ *	imprime el nuevo cliente
+ *
+ * \param eClient list[] = Estructura de Cliente
+ * \param int len = Tamaño de estructura Cliente
+ * \param int proxId = obtiene el id que se le va a dar al nuevo cliente
+ *
+ * \return Si se agrega un cliente retorna 0 en caso de error retorna -1
+ */
 int agregarCliente(eClient list[], int len, int proxId)
 {
     int aux;
@@ -42,6 +63,24 @@ int agregarCliente(eClient list[], int len, int proxId)
     return aux;
 }
 
+/** \brief Agrega un Pedido al programa
+ *
+ *	Carga en una estructura auxiliar una Pedido utilizando la funcion addPedidoNew,
+ *	con los datos obtenidos le da los datos a la funcion addPedido en caso de cargar el pedido
+ *	imprime el nuevo pedido
+ *
+ * \param eClient clientes[] = Estructura de Cliente
+ * \param int lenCliente = Tamaño de estructura Cliente
+ * \param ePedido pedido[] = Estructura de Pedido
+ * \param int lenPedido = Tamaño de estructura Pedido
+ * \param eEstado estado[] = Estructura de estado
+ * \param int lenEstado = Tamaño de estructura estado
+ * \param int idPedido = obtiene el id que se le va a dar al nuevo pedido
+ * \param int ultimoIdCliente = obtiene el id del ultimo cliente para validar
+ *
+ *
+ * \return Si se agrega un pedido retorna 0 en caso de error retorna -1
+ */
 int agregarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido, int ultimoIdCliente)
 {
 	int aux;
@@ -71,6 +110,24 @@ int agregarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int lenP
 	return aux;
 }
 
+/** \brief Procesa un pedido
+ *
+ *	Muestro los pedidos pendienes, Cargo el id del pedido que quiero modificar,
+ *	agrega los nuevos datos del pedido procesado con addPedidoNewProcesado
+ *	y le da los datos cargados a la funcion addPedidoProcesado e imprime el pedido procesado
+ *
+ * \param eClient clientes[] = Estructura de Cliente
+ * \param int lenCliente = Tamaño de estructura Cliente
+ * \param ePedido pedido[] = Estructura de Pedido
+ * \param int lenPedido = Tamaño de estructura Pedido
+ * \param eEstado estado[] = Estructura de estado
+ * \param int lenEstado = Tamaño de estructura estado
+ * \param int idPedido = obtiene el id que se le va a dar al nuevo pedido
+ * \param int ultimoIdCliente = obtiene el id del ultimo cliente para validar
+ *
+ *
+ * \return Retorna 0 en caso de error retorna -1
+ */
 int procesarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido)
 {
 	int aux;
@@ -83,9 +140,7 @@ int procesarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int len
 		printf("\nPROCESAR PEDIDO\n");
 		printf("-----------------------\n");
 		aux = 0;
-		//1. muestro los pedidos pendienes
 		printPedidosPendientes(pedido, lenPedido, clientes, lenCliente, estado, lenEstado);
-		//2. Cargo el id del pedido que quiero modificar
 		id = cargarUnEntero("Ingrese el id del pedido: ", "Error, ingrese un id de cliente valido: ", 1, idPedido-1, 4);
 		ePedido auxPedido;
 		auxPedido = addPedidoNewProcesado();
@@ -100,6 +155,13 @@ int procesarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int len
 	return aux;
 }
 
+/** \brief Modifica los datos de un cliente del programa
+ *
+ * \param eClient list[] = Estructura de Cliente
+ * \param int len = Tamaño de estructura Cliente
+ * \param int ultimoId = ultimo id ingresado para validar
+ *
+ */
 void modifiCliente(eClient list[], int len, int ultimoId)
 {
     int aux;
@@ -114,6 +176,13 @@ void modifiCliente(eClient list[], int len, int ultimoId)
     }
 }
 
+/** \brief Elimina los datos de un cliente del programa
+ *
+ * \param eClient list[] = Estructura de Cliente
+ * \param int len = Tamaño de estructura Cliente
+ * \param int ultimoId = ultimo id ingresado para validar
+ *
+ */
 void eliminarCliente(eClient list[], int len, int ultimoId)
 {
     int aux;
@@ -128,7 +197,24 @@ void eliminarCliente(eClient list[], int len, int ultimoId)
     }
 }
 
-
+/** \brief Informes con los datos del programa
+ *
+ *	Muestra un menu con informes del programa.
+ *
+ *
+ * \param eClient clientes[] = Estructura de Cliente
+ * \param int lenCliente = Tamaño de estructura Cliente
+ * \param ePedido pedido[] = Estructura de Pedido
+ * \param int lenPedido = Tamaño de estructura Pedido
+ * \param eEstado estado[] = Estructura de estado
+ * \param int lenEstado = Tamaño de estructura estado
+ * \param int idPedido = obtiene el id que se le va a dar al nuevo pedido
+ * \param int ultimoIdCliente = obtiene el id del ultimo cliente para validar
+ * \param int contPedidosPendientes = contador de pedidos pendientes para validar si se puede usar el primer informe
+ * \param int contPedidosProcesados = contador de pedidos procesados para validar si se puede usar el segundo informe
+ *
+ * \return Si se agrega un pedido retorna 0 en caso de error retorna -1
+ */
 int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido, int ultimoIdCliente, int contPedidosPendientes, int contPedidosProcesados)
 {
 

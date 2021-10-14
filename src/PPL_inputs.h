@@ -18,8 +18,6 @@
 #define TP 1000
 #define TE 2
 
-
-
 #ifndef EXTRAS_H_
 #define EXTRAS_H_
 void menu();
