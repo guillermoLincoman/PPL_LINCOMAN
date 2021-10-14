@@ -14,5 +14,5 @@ void modifiCliente(eClient list[], int len, int ultimoId);
 void eliminarCliente(eClient list[], int len, int ultimoId);
 int agregarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido, int ultimoIdCliente);
 int procesarPedido(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido);
-
+int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido, eEstado estado[], int lenEstado, int idPedido, int ultimoIdCliente);
 #endif /* FUNCIONESMENU_H_ */

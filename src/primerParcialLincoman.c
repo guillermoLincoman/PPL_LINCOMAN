@@ -19,12 +19,14 @@ int main()
     int contClientes;
     int contPedidosPendientes;
     int contPedidosProcesados;
+
     contPedidosProcesados = 0;
     contClientes = 0;
     contPedidosPendientes = 0;
     eClient client[TC];
     ePedido pedidos[TP];
     eEstado estado[TE]={{-1,"PENDIENTE"},{0,"PROCESADO"}};
+
     aux= iniciar(client, TC, pedidos, TP);
     if(aux!=0){
     	printf("Error, no es posible iniciar el programa....");
@@ -37,7 +39,7 @@ int main()
     do
     {
     	menu();
-        opcion=cargarUnEntero("Elija una opcion: ", "Elija una opcion entre 0 y 4: ", 0, 9, 4);
+        opcion=cargarUnEntero("Elija una opcion: ", "Elija una opcion entre 0 y 9: ", 0, 9, 4);
         switch(opcion)
         {
             case 1:
@@ -84,7 +86,6 @@ int main()
                 	aux = procesarPedido(client, TC, pedidos, TP, estado, TE, idProxPedido);
                 	if(aux==0)
                 	{
-
                     	contPedidosPendientes--;
                     	contPedidosProcesados++;
                 	}
@@ -115,6 +116,10 @@ int main()
                 }else{
                     printf("\nNo hay pedidos procesados...\n");
                 }
+                limpiar();
+                break;
+            case 9:
+                informes(client, TC, pedidos, TP, estado, TE, idProxPedido, idProxTrabajo);
                 limpiar();
                 break;
         }

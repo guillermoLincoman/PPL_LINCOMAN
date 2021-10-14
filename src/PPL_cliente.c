@@ -97,9 +97,9 @@ eClient addClientNew(int idNuevoCliente)
 	printf("------------------------------------\n");
 	printf("\nINGRESAR DIRECCION\n");
 	printf("------------------------------------\n");
-    getString(clienteNuevo.street, "\nCalle: ", "\nError, ingrese una calle valida (max 40 caracteres): ", 1, 40, 4);
+	getUsuario(clienteNuevo.street, "\nCalle: ", "\nError, ingrese una calle valida (max 40 caracteres): ", 1, 40, 4);
     clienteNuevo.altitude = cargarUnEntero("\nAltura: ", "\nError, ingrese un altura valida (entre 0 y 27300): ", 0, 27300, 4);
-    getString(clienteNuevo.localidad, "\nLocalidad: ", "\nError, ingrese una localidad valida (max 51 caracteres): ", 1, 51, 4);
+    getUsuario(clienteNuevo.localidad, "\nLocalidad: ", "\nError, ingrese una localidad valida (max 51 caracteres): ", 1, 51, 4);
 	printf("------------------------------------\n");
 
     return clienteNuevo;
@@ -146,21 +146,32 @@ int removeClient(eClient list[], int len, int ultimoId)
 	int error;
 	int i;
 	int idIngresado;
+	int confirmacion;
 	error= -1;
 	if(list != NULL)
 	{
 		printClients(list, len);
 		idIngresado= cargarUnEntero("Ingrese el id a eliminar: ", "Error, ingrese un id valido: ", 1000, ultimoId-1, 4);
 		i = findClientById(list, len, idIngresado);
-		if(i != -1){
-			strncpy(list[i].name, " ", 51);
-			list[i].cuit = 0;
-			strncpy(list[i].street, " ", 51);
-			list[i].altitude=0;
-			strncpy(list[i].localidad, " ", 51);
-			list[i].isEmpty=VACIO;
-	        printf("\nEl CLIENTE fue borrado con exito....\n\n");
-			error=0;
+		limpiar();
+		printf("\nEsta seguro que desea borrar al cliente? \n");
+		printClient(list[i]);
+		confirmacion = cargarUnEntero("\nConfirmar modificacion (1.Si 2.No): ", "\nError (1.Si 2.No): ", 1, 2, 4);
+		if(i != -1 ){
+			if(confirmacion == 1)
+			{
+				strncpy(list[i].name, " ", 51);
+				list[i].cuit = 0;
+				strncpy(list[i].street, " ", 51);
+				list[i].altitude=0;
+				strncpy(list[i].localidad, " ", 51);
+				list[i].isEmpty=VACIO;
+		        printf("\nEl CLIENTE fue borrado con exito....\n\n");
+				error=0;
+			}else{
+		        printf("\nEl Cliente no fue borrado....\n\n");
+			}
+
 		}
 	}
 	return error;

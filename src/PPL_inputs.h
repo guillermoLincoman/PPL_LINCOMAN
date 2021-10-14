@@ -23,6 +23,7 @@
 #ifndef EXTRAS_H_
 #define EXTRAS_H_
 void menu();
+void menuInformes();
 void limpiar();
 int validarLetra(char num[]);
 int cargarUnEntero(char* mensaje, char* mensajeError,int rangoMin, int rangoMax, int intentos);

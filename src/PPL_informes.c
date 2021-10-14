@@ -36,7 +36,7 @@ void printClients(eClient list[], int len)
 void printClient(eClient list)
 {
     printf("----------------------------------------------------------------------------------------------------------------\n");
-    printf("     %4d     | %20s |  %11d  | %20s |   %6d   | %20s  \n", list.idCompany, list.name, list.cuit, list.street, list.altitude, list.localidad);
+    printf("     %4d      | %20s | %11d  | %20s |   %6d   | %20s  \n", list.idCompany, list.name, list.cuit, list.street, list.altitude, list.localidad);
     printf("----------------------------------------------------------------------------------------------------------------\n");
 }
 
@@ -46,7 +46,7 @@ void printPedidosPendientes(ePedido pedido[], int lenPedido, eClient cliente[], 
     printf("____________________________________________________________________________________________________________________\n");
     printf("                                           LISTADO DE PEDIDOS PENDIENTES                                            |\n");
     printf("____________________________________________________________________________________________________________________|\n");
-    printf(" ID PEDIDO |  CUIT CLIENTE |          CALLE       |   ALTURA   |       LOCALIDAD      |   TOTAL KILOS   |   ESTADO  |\n");
+    printf(" ID PEDIDO |  CUIT CLIENTE |        CALLE         |   ALTURA   |       LOCALIDAD      |   TOTAL KILOS   |   ESTADO  |\n");
     printf("___________|_______________|______________________|____________|______________________|_________________|___________|\n");
     for(i=0; i<lenPedido; i++)
     {
@@ -67,9 +67,9 @@ void printPedidoPendiente(ePedido list, eEstado estado[], int lenEstado, eClient
 			if(list.estado == estado[i].estado){
 				for (j = 0; j < lenCliente; ++j) {
 					if(list.cuitCliente == cliente[j].cuit){
-						printf("--------------------------------------------------------------------------------------------------------------------\n");
-						printf("   %6d  |  %11d  | %20s |   %6d   | %20s |      %6d     | %10s|\n", list.idPedido ,list.cuitCliente, cliente[j].street, cliente[j].altitude, cliente[j].localidad, list.kilosTotales, estado[i].descripcion);
-						printf("--------------------------------------------------------------------------------------------------------------------\n");
+						printf("---------------------------------------------------------------------------------------------------------------------\n");
+						printf("   %6d  |  %11d  | %20s |   %6d   | %20s |      %6d     | %10s \n", list.idPedido ,list.cuitCliente, cliente[j].street, cliente[j].altitude, cliente[j].localidad, list.kilosTotales, estado[i].descripcion);
+						printf("---------------------------------------------------------------------------------------------------------------------\n");
 						break;
 					}
 				}
@@ -79,52 +79,16 @@ void printPedidoPendiente(ePedido list, eEstado estado[], int lenEstado, eClient
 }
 
 
-/** \brief Agrega a un estructura auxiliar los valores ingresados por el usuario
- * \param int idNuevoEmpleado id del nuevo empleado a cargar
- * \return Devuelve  una estructura cargada con los datos ingresados por el usuario
-*/
-ePedido addPedidoNewProcesado()
-{
-	printf("\nINGRESE EL NUEVO PEDIDO\n");
-	printf("------------------------------------\n");
-	ePedido nuevoPedido;
-	nuevoPedido.kilosHDPE = cargarUnEntero("\nCantidad de kilos HDPE recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg): ", 0, 1000, 4);
-	nuevoPedido.kilosLPDE = cargarUnEntero("\nCantidad de kilos LPDE recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg): ", 0, 1000, 4);
-	nuevoPedido.kilosPP = cargarUnEntero("\nCantidad de kilos PP recolectado: Kg ", "\nError, ingrese una cantidad de kilos valida (maximo 1000 Kg ): ", 0, 1000, 4);
-	nuevoPedido.estado = PROCESADO;
-	printf("------------------------------------\n");
-    return nuevoPedido;
-}
-
-int addPedidoProcesado(ePedido list[], int id, int len,int kilosHDPE, int kilosLPDE, int kilosPP)
-{
-	int i;
-
-	i = findPedidoById(list, len, id);
-	if(i != -1)
-	{
-		list[i].kilosHDPE = kilosHDPE;
-		list[i].kilosLPDE = kilosLPDE;
-		list[i].kilosPP = kilosPP;
-		list[i].kilosTotalesProcesados=kilosHDPE + kilosLPDE + kilosPP;
-		list[i].estado=PROCESADO;
-	}else{
-		printf("nose encontro");
-	}
-
-
-	return i;
-}
 
 
 void printPedidosProcesados(ePedido pedido[], int lenPedido,eClient cliente[], int lenCliente, eEstado estado[], int lenEstado)
 {
     int i;
-	printf("\n_____________________________________________________________________________________________________________________________________________________________\n");
-    printf("                                                                     LISTADO DE PEDIDOS PROCESADOS                                                           |\n");
-    printf("_____________________________________________________________________________________________________________________________________________________________|\n");
-    printf(" ID PEDIDO |  CUIT CLIENTE |          CALLE       |   ALTURA   |       LOCALIDAD      |  KILOS HDPE  |  KILOS LDPE  |  KILOS PP  |  TOTAL KILOS  |   ESTADO  |\n");
-    printf("___________|_______________|______________________|____________|______________________|______________|______________|____________|_______________|___________|\n");
+	printf("\n______________________________________________________________________________________________________________________________________________________________\n");
+    printf("                                                                     LISTADO DE PEDIDOS PROCESADOS                                                            |\n");
+    printf("______________________________________________________________________________________________________________________________________________________________|\n");
+    printf(" ID PEDIDO |  CUIT CLIENTE |          CALLE       |   ALTURA   |       LOCALIDAD      |  KILOS HDPE  |  KILOS LDPE  |  KILOS PP  |  TOTAL KILOS  |   ESTADO   |\n");
+    printf("___________|_______________|______________________|____________|______________________|______________|______________|____________|_______________|____________|\n");
     for(i=0; i<lenPedido; i++)
     {
     	if(pedido[i].isEmpty == OCUPADO)
@@ -144,9 +108,9 @@ void printPedidoProcesado(ePedido list, eEstado estado[], int lenEstado, eClient
 			if(list.estado == estado[i].estado){
 				for (j = 0; j < lenCliente; ++j) {
 					if(list.cuitCliente == cliente[j].cuit){
-						printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-						printf("   %6d  |  %11d  | %20s |   %6d   | %20s |    %6d    |    %6d    |   %6d   |    %6d     | %10s|\n", list.idPedido ,list.cuitCliente, cliente[j].street, cliente[j].altitude, cliente[j].localidad, list.kilosHDPE, list.kilosLPDE, list.kilosPP ,list.kilosTotalesProcesados, estado[i].descripcion);
-						printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+						printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+						printf("   %6d  |  %11d  | %20s |   %6d   | %20s |    %6d    |    %6d    |   %6d   |    %6d     | %10s\n", list.idPedido ,list.cuitCliente, cliente[j].street, cliente[j].altitude, cliente[j].localidad, list.kilosHDPE, list.kilosLPDE, list.kilosPP ,list.kilosTotalesProcesados, estado[i].descripcion);
+						printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 						break;
 					}
 				}
@@ -154,4 +118,19 @@ void printPedidoProcesado(ePedido list, eEstado estado[], int lenEstado, eClient
 		}
 
 	}
+}
+
+int cantPedidosPorLocalidad(ePedido pedido[], int lenPedido, char localidad[])
+{
+	int contador;
+	int i;
+	contador=0;
+		for (i = 0; i < lenPedido; ++i) {
+			if(pedido[i].estado == PENDIENTE){
+					if(strcmp(pedido[i].localidad, localidad)==0){
+						contador++;
+					}
+			}
+		}
+	return contador;
 }

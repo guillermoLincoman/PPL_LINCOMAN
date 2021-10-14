@@ -19,9 +19,20 @@ void menu()
     printf("| 6. Imprimir Clientes              |\n");
     printf("| 7. Imprimir Pedidos pendientes    |\n");
     printf("| 8. Imprimir Pedidos procesados    |\n");
-    printf("| 9. Informes:                      |\n");
+    printf("| 9. Informes                       |\n");
     printf("| 0. SALIR                          |\n");
     printf("*************************************\n");
+}
+
+void menuInformes()
+{
+    printf("\n*********************************************************************************************************************\n");
+    printf("* INFORMES                                                                                                          *\n");
+    printf("*********************************************************************************************************************\n");
+    printf("| 1. Ingresar una localidad e indicar la cantidad de pedidos pendientes para dicha localidad.                       |\n");
+    printf("| 2. Cantidad de kilos de polipropileno reciclado promedio por cliente. (kilos totales / cantidad de clientes)	    |\n");
+    printf("| 0. SALIR                                                                                                          |\n");
+    printf("*********************************************************************************************************************\n");
 }
 
 void limpiar()
