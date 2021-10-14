@@ -221,13 +221,14 @@ int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido
 	int aux;
 	float promedio;
 	int opcion;
+	int criterio;
 	char auxLocalidad[51];
 	aux=-1;
 	if(clientes != NULL && pedido != NULL && estado != NULL)
 	{
 		do{
 			menuInformes();
-	        opcion=cargarUnEntero("Elija una opcion: ", "Elija una opcion entre 0 y 2: ", 0, 3, 4);
+	        opcion=cargarUnEntero("Elija una opcion: ", "Elija una opcion entre 0 y 4: ", 0, 4, 4);
 
 	        switch(opcion)
 	        {
@@ -266,6 +267,17 @@ int informes(eClient clientes[], int lenCliente, ePedido pedido[], int lenPedido
 	        		{
 
 	        			clienteConMasPedidos(pedido, lenPedido, clientes, lenCliente);
+	        		}else{
+	                    printf("\nAun no hay pedidos...\n");
+	        		}
+	        		limpiar();
+	    			break;
+	        	case 4:
+	        		if(contPedidosPendientes>0)
+	        		{
+	        			printf("\nDesea los clientes con mas pedidos pendientes o completos?\n1 = PENDIENTE\n0 = COMPLETO\n\n");
+	        			criterio = cargarUnEntero("Seleccion el criterio: ", "Seleccion el criterio(-1 o 0): ", -1, 0, 4);
+	        			clienteConMasPedidosEstado(pedido, lenPedido, clientes, lenCliente, estado, lenEstado, criterio);
 	        		}else{
 	                    printf("\nAun no hay pedidos...\n");
 	        		}

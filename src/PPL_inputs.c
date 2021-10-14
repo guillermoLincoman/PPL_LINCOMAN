@@ -32,7 +32,7 @@ void menuInformes()
     printf("| 1. Ingresar una localidad e indicar la cantidad de pedidos pendientes para dicha localidad.                       |\n");
     printf("| 2. Cantidad de kilos de polipropileno reciclado promedio por cliente. (kilos totales / cantidad de clientes)	    |\n");
     printf("| 3. Cliente con más pedidos.                                                                                  	    |\n");
-    printf("| 4. Cliente con más pedidos pendientes.                                                                       	    |\n");
+    printf("| 4. Cliente con más pedidos segun el estado                                                                   	    |\n");
     printf("| 0. SALIR                                                                                                          |\n");
     printf("*********************************************************************************************************************\n");
 }

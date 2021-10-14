@@ -222,7 +222,6 @@ void clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], in
 		for (i = 0; i < lenPedido; ++i) {
 			if(pedido[i].isEmpty==OCUPADO)
 			{
-				//1. Cargo el array de contadores
 				for (j = 0; j < lenCliente; ++j) {
 					if(pedido[i].idEmpresa==cliente[j].idCompany)
 					{
@@ -245,9 +244,41 @@ void clienteConMasPedidos(ePedido pedido[], int lenPedido, eClient cliente[], in
 
 void clienteConMasPedidosEstado(ePedido pedido[], int lenPedido, eClient cliente[], int lenCliente, eEstado estado[], int lenEstado, int criterio)
 {
-
-	if(pedido != NULL && cliente != NULL)
+	int i;
+	int j;
+	int arrayCont[lenCliente];
+	int numMayor;
+	initCont(arrayCont, lenCliente);
+	if(pedido != NULL && cliente != NULL && estado != NULL)
 	{
 
+		if(pedido != NULL && cliente != NULL)
+		{
+			for (i = 0; i < lenPedido; ++i) {
+				if(pedido[i].isEmpty==OCUPADO && pedido[i].estado == criterio)
+				{
+					for (j = 0; j < lenCliente; ++j) {
+						if(pedido[i].idEmpresa==cliente[j].idCompany)
+						{
+							arrayCont[j]++;
+						}
+					}
+				}
+			}
+
+			numMayor = numeroMayor(arrayCont, lenCliente);
+
+			for (i = 0; i < lenCliente; ++i) {
+				if(arrayCont[i] == numMayor)
+				{
+					for (j = 0; j < lenEstado; ++j) {
+						if(criterio == estado[j].estado)
+						printf("El cliente con mas pedidos %s tiene %d pedidos  y es:\n", estado[j].descripcion, numMayor);
+						printClient(cliente[i]);
+					}
+
+				}
+			}
+		}
 	}
 }
